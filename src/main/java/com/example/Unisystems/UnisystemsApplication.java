@@ -73,6 +73,8 @@ public class UnisystemsApplication implements CommandLineRunner {
 		Employee emp2 = new Employee("Petros", "Euthimiou", "Spetson 17", "2108834081", new Date(111, 5, 15), new Date(), true, true, c1, b1, d3, u5, "Senior Developer");
 		Employee emp3 = new Employee("Mitsos", "Kitsou", "Spartis 25", "2108855284", new Date(110, 11, 5), new Date(), true, true, c1, b1, d1, u2, "Hr officer");
 		Employee emp4 = new Employee("Kostas", "Fleggas", "Tsoxa 13", "2107440081", new Date(112, 7, 15), new Date(), true, true, c1, b1, d3, u5, " Manager");
+		Employee emp5 = new Employee("George", "Dom", "Ymitou 40", "2105520081", new Date(112, 2, 15), new Date(), true, true, c1, b1, d2, u4, " Mid-Senior Developer");
+
 
 		employeeRepository.save(emp1);
 		employeeRepository.save(emp2);
