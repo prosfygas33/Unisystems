@@ -13,14 +13,12 @@ public class BusinessUnit {
     @ManyToOne
     private Company company;
 
-    public BusinessUnit(String name, String type, Company company) {
+    public BusinessUnit(String name, Company company) {
         this.name = name;
 
         this.company = company;
     }
 
-    public BusinessUnit(String bsU, Company companyInput) {
-    }
 
     public Long getId() {
         return id;
