@@ -8,15 +8,14 @@ public class BusinessUnit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    private String type;
 
     @ManyToOne
     private Company company;
 
-    public BusinessUnit(String name, String type, Company company) {
+    public BusinessUnit(String name, Company company) {
         this.name = name;
-        this.type = type;
         this.company = company;
     }
 
@@ -29,14 +28,6 @@ public class BusinessUnit {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Company getCompany() {
