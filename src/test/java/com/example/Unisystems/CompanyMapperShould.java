@@ -20,9 +20,9 @@ public class CompanyMapperShould {
     public void setup(){
 
         mapper = new CompanyMapper();
-        companyInput =new Company("unis");
+        companyInput =new Company("Unisy");
         companyInput.setId((long) 5);
-        expectedOutput = new CompanyResponse(5,"unis");
+        expectedOutput = new CompanyResponse(5,"Unis");
     }
 
     @Test

@@ -20,7 +20,7 @@ public class BusinessUnitMapperShould {
     public void setup() {
 
         mapper = new BusinessUnitMapper();
-        companyInput = new Company("unis");
+        companyInput = new Company("Unisy");
         businessUnitInput = new BusinessUnit("BsU", companyInput);
         businessUnitInput.setId((long) 5);
         expectedOutput = new BusinessUnitResponse(5, "BsU", companyInput);
