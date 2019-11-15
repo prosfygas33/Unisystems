@@ -4,13 +4,15 @@ public class BusinessUnitResponse {
 
     private long id;
     private String name;
+    private String type;
 
     private Company company;
 
-    public BusinessUnitResponse(long id, String name, Company company) {
+    public BusinessUnitResponse(long id, String name, String type, Company company) {
         this.id = id;
         this.name = name;
-                this.company = company;
+        this.type = type;
+        this.company = company;
     }
 
     public Company getCompany() {
@@ -37,4 +39,11 @@ public class BusinessUnitResponse {
         this.name = name;
     }
 
-   }
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+}

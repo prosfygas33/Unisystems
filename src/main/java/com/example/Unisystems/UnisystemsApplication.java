@@ -35,13 +35,13 @@ public class UnisystemsApplication implements CommandLineRunner {
 	@Override
 	public void run(java.lang.String... args) throws Exception {
 
-		Company c1 = new Company("UniSystems");
+		Company c1 = new Company("UniSystems", "Informatics Services");
 		//Company c2 = new Company("ACS","Transportation Services");
 
 		companyRepository.save(c1);
 
-		BusinessUnit b1 = new BusinessUnit("BusinessUnitA", c1);
-		BusinessUnit b2 = new BusinessUnit("BusinessUnitB", c1);
+		BusinessUnit b1 = new BusinessUnit("BusinessUnitA", "A", c1);
+		BusinessUnit b2 = new BusinessUnit("BusinessUnitB", "B", c1);
 
 		businessUnitRepository.save(b1);
 		businessUnitRepository.save(b2);

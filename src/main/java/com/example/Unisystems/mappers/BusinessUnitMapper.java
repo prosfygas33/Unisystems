@@ -12,6 +12,7 @@ public class BusinessUnitMapper {
         return new BusinessUnitResponse(
                 businessUnit.getId(),
                 businessUnit.getName(),
+                businessUnit.getType(),
                 businessUnit.getCompany()
         );
     }

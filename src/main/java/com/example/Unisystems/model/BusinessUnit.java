@@ -9,17 +9,18 @@ public class BusinessUnit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
+    private String type;
 
     @ManyToOne
     private Company company;
 
     public BusinessUnit(String name, String type, Company company) {
         this.name = name;
-                this.company = company;
+        this.type = type;
+        this.company = company;
     }
 
-    public BusinessUnit(String businessUnitB, Company c1) {
+    public BusinessUnit() {
     }
 
     public Long getId() {
@@ -30,7 +31,15 @@ public class BusinessUnit {
         this.id = id;
     }
 
-      public Company getCompany() {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Company getCompany() {
         return company;
     }
 
