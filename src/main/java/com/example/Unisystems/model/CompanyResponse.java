@@ -5,9 +5,11 @@ public class CompanyResponse {
     private long id;
     private String name;
 
+
     public CompanyResponse(long id, String name) {
         this.id = id;
         this.name = name;
+
     }
 
     public long getId() {
@@ -26,4 +28,4 @@ public class CompanyResponse {
         this.name = name;
     }
 
-}
+   }
