@@ -27,23 +27,22 @@ public class BusinessUnitMapperShould {
 
     }
 
-        @Test
-        public void mapBusinessUnitResponseFromBusinessUnit () {
-            BusinessUnitResponse output = mapper.mapBusinessUnitResponseFromBusinessUnit(businessUnitInput);
-            Assert.assertThat(expectedOutput, Matchers.samePropertyValuesAs(output));
-        }
+      //  @Test
+        //public void mapBusinessUnitResponseFromBusinessUnit () {
+          //  BusinessUnitResponse output = mapper.mapBusinessUnitResponseFromBusinessUnit(businessUnitInput);
+            //Assert.assertThat(expectedOutput, Matchers.samePropertyValuesAs(output));
+        //}
 
         @Test
         public void keepSameId() {
             Assert.assertEquals(5, expectedOutput.getId());
         }
 
-    @Test
-    public void keepName() { Assert.assertEquals("BsU", expectedOutput.getName());
-    }
+        @Test
+        public void keepName() { Assert.assertEquals("BsU", expectedOutput.getName()); }
 
-    @Test
-    public void keepCompany(){Assert.assertEquals(companyInput,expectedOutput.getCompany()); }
+        @Test
+       public void keepCompany(){Assert.assertEquals(companyInput,expectedOutput.getCompany()); }
 
 
     }
