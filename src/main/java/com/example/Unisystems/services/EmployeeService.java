@@ -43,14 +43,15 @@ public class EmployeeService {
         return employees;
     }
 
-    public List<EmployeeResponse> getAllEmployeesById(Long id) {
+    public GenericResponse<List<EmployeeResponse>>getAllEmployeesById(Long id) {
         Iterable<Employee> retrieveEmployees = repository.findAll();
         List<EmployeeResponse> employees = new ArrayList<>();
         for(Employee employee: retrieveEmployees){
             if(id == employee.getId())
                 employees.add(mapper.mapEmployeeResponseFromEmployee(employee));
+
         }
-        return employees;
+        return new GenericResponse<>(employees);
     }
 
     public GenericResponse<List<EmployeeResponse>> getAllEmployeesByCriteria(String criteria, Long id) {

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Id;
 import java.util.List;
 
 @RestController
@@ -25,8 +26,25 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
-    public GetAllEmployees getAllEmployeesById(@PathVariable Long id){
-        return new GetAllEmployees(service.getAllEmployeesById(id));
+    public ResponseEntity getAllEmployeesById(@PathVariable Long id){
+        GenericResponse<List<EmployeeResponse>> response=service.getAllEmployeesById(id);
+
+        try{
+            return new ResponseEntity (
+                    new GetAllEmployees(response.getData()),
+                null,
+                HttpStatus.OK
+            );
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return  new ResponseEntity(
+                    new Error(0,"Error","Something went wrong please try again"),
+                    null,
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+
+        }
     }
 /*
     @GetMapping("/EmployeesByCriteria/{searchCriteria}/{id}")
