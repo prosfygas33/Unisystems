@@ -12,14 +12,14 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String field;
+
 
     public Company(String name, String field) {
         this.name = name;
-        this.field = field;
+
     }
 
-    public Company() {
+    public Company(String uniSystems) {
     }
 
     public String getName() {
@@ -30,15 +30,7 @@ public class Company {
         this.name = name;
     }
 
-    public String getField() {
-        return field;
-    }
-
-    public void setField(String field) {
-        this.field = field;
-    }
-
-    public Long getId() {
+      public Long getId() {
         return id;
     }
 
