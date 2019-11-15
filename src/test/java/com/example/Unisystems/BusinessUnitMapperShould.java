@@ -23,7 +23,7 @@ public class BusinessUnitMapperShould {
         companyInput = new Company("Unisy");
         businessUnitInput = new BusinessUnit("BsU", companyInput);
         businessUnitInput.setId((long) 5);
-        expectedOutput = new BusinessUnitResponse(5, "BsU", companyInput);
+        expectedOutput = mapper.mapBusinessUnitResponseFromBusinessUnit(businessUnitInput);
 
     }
 
@@ -34,8 +34,7 @@ public class BusinessUnitMapperShould {
         //}
 
         @Test
-        public void keepSameId() {
-            Assert.assertEquals(5, expectedOutput.getId());
+        public void keepSameId() { Assert.assertEquals(5, expectedOutput.getId());
         }
 
         @Test

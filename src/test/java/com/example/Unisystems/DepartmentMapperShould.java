@@ -21,7 +21,8 @@ public class DepartmentMapperShould {
     public void setup(){
         mapper = new DepartmentMapper();
         departmentInput = new Department("Depar",businessUnitInput);
-        expectedOutput = new DepartmentResponse(5,"Depar",businessUnitInput);
+        departmentInput.setId((long) 5);
+        expectedOutput = mapper.mapDepartmentResponseFromDepartment(departmentInput);
     }
 
         @Test
