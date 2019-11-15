@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.util.Date;
 
-public class EmployeeMapperShould {
+public class  EmployeeMapperShould {
 
 
     private EmployeeMapper employeeMapper;

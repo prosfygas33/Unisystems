@@ -23,8 +23,8 @@ public class UnitMapperShould {
         //businessUnitInput = new BusinessUnit("BsU", companyInput);
         //departmentInput = new Department("Depar",businessUnitInput);
         unitInput = new Unit("Un",departmentInput);
-        //unitInput.setId(5);
-        expectedOutput = new UnitResponse(5,"Un",departmentInput);
+        unitInput.setId(5);
+        expectedOutput = mapper.mapUnitResponseFromUnit(unitInput);
     }
 
         @Test
