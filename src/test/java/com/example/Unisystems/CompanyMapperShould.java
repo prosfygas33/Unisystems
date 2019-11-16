@@ -1,8 +1,8 @@
 package com.example.Unisystems;
 
-import com.example.Unisystems.mappers.CompanyMapper;
-import com.example.Unisystems.model.Company;
-import com.example.Unisystems.model.CompanyResponse;
+import com.example.Unisystems.Company.CompanyMapper;
+import com.example.Unisystems.Company.Company;
+import com.example.Unisystems.Company.CompanyResponse;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;

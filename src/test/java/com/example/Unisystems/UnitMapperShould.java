@@ -1,7 +1,11 @@
 package com.example.Unisystems;
 
-import com.example.Unisystems.mappers.UnitMapper;
-import com.example.Unisystems.model.*;
+import com.example.Unisystems.BusinessUnit.BusinessUnit;
+import com.example.Unisystems.Company.Company;
+import com.example.Unisystems.Department.Department;
+import com.example.Unisystems.Unit.Unit;
+import com.example.Unisystems.Unit.UnitResponse;
+import com.example.Unisystems.Unit.UnitMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

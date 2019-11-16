@@ -1,6 +1,6 @@
 package com.example.Unisystems;
 
-import com.example.Unisystems.model.Employee;
+import com.example.Unisystems.Employee.Employee;
 
 import java.util.List;
 

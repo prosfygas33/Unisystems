@@ -1,10 +1,9 @@
 package com.example.Unisystems;
 
-import com.example.Unisystems.mappers.BusinessUnitMapper;
-import com.example.Unisystems.model.BusinessUnit;
-import com.example.Unisystems.model.BusinessUnitResponse;
-import com.example.Unisystems.model.Company;
-import org.hamcrest.Matchers;
+import com.example.Unisystems.BusinessUnit.BusinessUnitMapper;
+import com.example.Unisystems.BusinessUnit.BusinessUnit;
+import com.example.Unisystems.BusinessUnit.BusinessUnitResponse;
+import com.example.Unisystems.Company.Company;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

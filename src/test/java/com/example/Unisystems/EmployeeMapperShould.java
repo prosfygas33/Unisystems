@@ -1,8 +1,14 @@
 package com.example.Unisystems;
 
 
-import com.example.Unisystems.mappers.EmployeeMapper;
-import com.example.Unisystems.model.*;
+import com.example.Unisystems.BusinessUnit.BusinessUnit;
+import com.example.Unisystems.Company.Company;
+import com.example.Unisystems.Department.Department;
+import com.example.Unisystems.Employee.Employee;
+import com.example.Unisystems.Employee.EmployeeMapper;
+import com.example.Unisystems.Employee.EmployeeResponse;
+import com.example.Unisystems.Employee.Status;
+import com.example.Unisystems.Unit.Unit;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

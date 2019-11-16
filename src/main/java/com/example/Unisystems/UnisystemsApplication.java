@@ -1,7 +1,15 @@
 package com.example.Unisystems;
 
-import com.example.Unisystems.model.*;
-import com.example.Unisystems.repositories.*;
+import com.example.Unisystems.BusinessUnit.BusinessUnit;
+import com.example.Unisystems.BusinessUnit.BusinessUnitRepository;
+import com.example.Unisystems.Company.Company;
+import com.example.Unisystems.Company.CompanyRepository;
+import com.example.Unisystems.Department.Department;
+import com.example.Unisystems.Department.DepartmentRepository;
+import com.example.Unisystems.Employee.Employee;
+import com.example.Unisystems.Employee.EmployeeRepository;
+import com.example.Unisystems.Unit.Unit;
+import com.example.Unisystems.Unit.UnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
