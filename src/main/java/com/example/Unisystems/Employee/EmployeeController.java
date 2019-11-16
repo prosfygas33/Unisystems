@@ -25,23 +25,16 @@ public class EmployeeController {
     public ResponseEntity getAllEmployeesById(@PathVariable Long id){
         GenericResponse<List<EmployeeResponse>> response=service.getAllEmployeesById(id);
 
-        try{
-            return new ResponseEntity (
-                    new GetAllEmployees(response.getData()),
-                null,
-                HttpStatus.OK
-            );
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return  new ResponseEntity(
-                    new Error(0,"Error","Something went wrong please try again"),
+        if(response.getError() != null){
+            return new ResponseEntity<>(response.getError(),
                     null,
-                    HttpStatus.INTERNAL_SERVER_ERROR
-            );
-
+                    HttpStatus.BAD_REQUEST);
         }
-    }
+        return new ResponseEntity<>(new GetAllEmployees(response.getData()),
+                null,
+                HttpStatus.OK);
+        }
+
 /*
     @GetMapping("/EmployeesByCriteria/{searchCriteria}/{id}")
     public GetAllEmployeesResponse getAllEmployeesByCriteria(@PathVariable("searchCriteria") String searchCriteria, @PathVariable("id") Long id){

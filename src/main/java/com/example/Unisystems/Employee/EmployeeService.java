@@ -50,6 +50,7 @@ public class EmployeeService {
                 employees.add(mapper.mapEmployeeResponseFromEmployee(employee));
 
         }
+        if(employees.isEmpty())  return new GenericResponse<>(new Error(0,"Not Found", "No employee record exist for given id " + id));
         return new GenericResponse<>(employees);
     }
 
