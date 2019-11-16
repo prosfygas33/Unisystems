@@ -33,10 +33,15 @@ public class  EmployeeMapperShould {
         department.setId((long) 1);
         unit = new Unit("UnitName",department);
         unit.setId(1);
-        employeeInput = new Employee("Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, company, businessUnit, department, unit, "Junior Developer");
+        employeeInput = new Employee(1,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, company, businessUnit, department, unit, "Junior Developer");
         employeeInput.setId(10);
 
         employeeResponseOutput = employeeMapper.mapEmployeeResponseFromEmployee(employeeInput);
+    }
+
+    @Test
+    public void keepSameRecordNumber(){
+        Assert.assertEquals(1,employeeResponseOutput.getRecordNumber());
     }
 
     @Test
