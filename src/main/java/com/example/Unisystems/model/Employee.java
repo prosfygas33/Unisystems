@@ -9,7 +9,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    private  int recordNumber;
     private String firstname;
     private String lastname;
     private String address;
@@ -34,7 +34,8 @@ public class Employee {
 
     private String position;
 
-    public Employee(String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, String position) {
+    public Employee(int recordNumber,String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, String position) {
+        this.recordNumber=recordNumber;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
@@ -59,6 +60,14 @@ public class Employee {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public int getRecordNumber() {
+        return recordNumber;
+    }
+
+    public void setRecordNumber(int recordNumber) {
+        this.recordNumber = recordNumber;
     }
 
     public String getFirstname() {
