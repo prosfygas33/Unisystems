@@ -3,10 +3,13 @@ package com.example.Unisystems.Employee;
 import com.example.Unisystems.BusinessUnit.BusinessUnit;
 import com.example.Unisystems.Company.Company;
 import com.example.Unisystems.Department.Department;
+import com.example.Unisystems.Task.Task;
 import com.example.Unisystems.Unit.Unit;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Employee {
@@ -37,11 +40,13 @@ public class Employee {
     @ManyToOne
     private Unit unit;
 
+    @ManyToOne
+    private Set<Task> tasksOwned;
+
     private String position;
 
-
-    public Employee(int recordNumber,String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, String position) {
-        this.recordNumber=recordNumber;
+    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, Set<Task> tasksOwned, String position) {
+        this.recordNumber = recordNumber;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
@@ -54,11 +59,13 @@ public class Employee {
         this.businessUnit = businessUnit;
         this.department = department;
         this.unit = unit;
+        this.tasksOwned = tasksOwned;
         this.position = position;
     }
 
     public Employee(){
     }
+
 
     public long getId() {
         return id;
@@ -178,5 +185,13 @@ public class Employee {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public Set<Task> getTasksOwned() {
+        return tasksOwned;
+    }
+
+    public void setTasksOwned(Set<Task> tasksOwned) {
+        this.tasksOwned = tasksOwned;
     }
 }
