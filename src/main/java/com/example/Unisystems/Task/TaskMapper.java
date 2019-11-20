@@ -11,9 +11,6 @@ public class TaskMapper {
                 task.getId(),
                 task.getTitle(),
                 task.getDesc(),
-                task.getEstimationA(),
-                task.getEstimationB(),
-                task.getEstimationC(),
                 task.getStatus(),
                 task.getUpdateList(),
                 task.getOwner()

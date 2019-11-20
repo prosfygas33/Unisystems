@@ -18,9 +18,9 @@ public class Task {
     private int estimationB;
     private int estimationC;
     private  TaskStatus   status;
-    private List<String> UpdateList;
+    private List<String> updateList;
 
-    @OneToMany
+    @ManyToMany
     private Employee owner;
 
 
@@ -31,7 +31,7 @@ public class Task {
         this.estimationB = estimationB;
         this.estimationC = estimationC;
         this.status = status;
-        UpdateList = updateList;
+        this.updateList = updateList;
         this.owner = owner;
     }
 
@@ -95,11 +95,11 @@ public class Task {
     }
 
     public List<String> getUpdateList() {
-        return UpdateList;
+        return updateList;
     }
 
     public void setUpdateList(List<String> updateList) {
-        UpdateList = updateList;
+        this.updateList = updateList;
     }
 
     public Employee getOwner() {

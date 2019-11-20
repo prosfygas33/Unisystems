@@ -9,7 +9,6 @@ import com.example.Unisystems.Unit.Unit;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Employee {
@@ -40,12 +39,11 @@ public class Employee {
     @ManyToOne
     private Unit unit;
 
-    @ManyToOne
-    private Set<Task> tasksOwned;
+    private List<Task> tasksOwned;
 
     private String position;
 
-    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, Set<Task> tasksOwned, String position) {
+    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasksOwned, String position) {
         this.recordNumber = recordNumber;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -187,11 +185,11 @@ public class Employee {
         this.position = position;
     }
 
-    public Set<Task> getTasksOwned() {
+    public List<Task> getTasksOwned() {
         return tasksOwned;
     }
 
-    public void setTasksOwned(Set<Task> tasksOwned) {
+    public void setTasksOwned(List<Task> tasksOwned) {
         this.tasksOwned = tasksOwned;
     }
 }

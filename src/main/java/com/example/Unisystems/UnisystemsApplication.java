@@ -18,9 +18,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @SpringBootApplication
 public class UnisystemsApplication implements CommandLineRunner {
@@ -84,16 +82,20 @@ public class UnisystemsApplication implements CommandLineRunner {
 		unitRepository.save(u4);
 		unitRepository.save(u5);
 
+		List<String> updateList =new ArrayList<>();
 
-		Task task1=new Task("Java app","Tournament",5,4,3, TaskStatus.DONE,task1.getUpdateList(),"Petros");
+		Task task1=new Task("Java app","Tournament",5,4,3, TaskStatus.DONE,updateList,null);
 		taskRepository.save(task1);
 
 
-		Employee emp1 = new Employee(111,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, c1, b1, d2, u4,emp1.getTasksOwned(task1),"Junior Developer");
-		Employee emp2 = new Employee(122,"Petros", "Euthimiou", "Spetson 17", "2108834081", new Date(111, 5, 15), new Date(), true, true, c1, b1, d3, u5,emp2.getTasksOwned() ,"Senior Developer");
-		Employee emp3 = new Employee(123,"Mitsos", "Kitsou", "Spartis 25", "2108855284", new Date(110, 11, 5), new Date(), true, true, c1, b1, d1, u2,emp3.getTasksOwned() ,"Hr officer");
-		Employee emp4 = new Employee(124,"Kostas", "Fleggas", "Tsoxa 13", "2107440081", new Date(112, 7, 15), new Date(), true, true, c1, b1, d3, u5, emp4.getTasksOwned()," Manager");
-		Employee emp5 = new Employee(125,"George", "Dom", "Ymitou 40", "2105520081", new Date(112, 2, 15), new Date(), true, true, c1, b1, d2, u4, emp5.getTasksOwned()," Mid-Senior Developer");
+		List<Task> taskList=new ArrayList<>();
+		taskList.add(task1);
+
+		Employee emp1 = new Employee(111,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, c1, b1, d2, u4,taskList,"Junior Developer");
+		Employee emp2 = new Employee(122,"Petros", "Euthimiou", "Spetson 17", "2108834081", new Date(111, 5, 15), new Date(), true, true, c1, b1, d3, u5, null,"Senior Developer");
+		Employee emp3 = new Employee(123,"Mitsos", "Kitsou", "Spartis 25", "2108855284", new Date(110, 11, 5), new Date(), true, true, c1, b1, d1, u2,null ,"Hr officer");
+		Employee emp4 = new Employee(124,"Kostas", "Fleggas", "Tsoxa 13", "2107440081", new Date(112, 7, 15), new Date(), true, true, c1, b1, d3, u5, null," Manager");
+		Employee emp5 = new Employee(125,"George", "Dom", "Ymitou 40", "2105520081", new Date(112, 2, 15), new Date(), true, true, c1, b1, d2, u4, null," Mid-Senior Developer");
 
 
 
