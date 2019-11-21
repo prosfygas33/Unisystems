@@ -1,25 +1,36 @@
 package com.example.Unisystems.Task;
 
-
 import org.springframework.stereotype.Component;
 
 @Component
 public class TaskMapper {
+
 
     public TaskResponse mapTasResponseFromTask(Task task){
         return new TaskResponse(
                 task.getId(),
                 task.getTitle(),
                 task.getDesc(),
+                mapDifficultyFromEstimation(task),
                 task.getStatus(),
                 task.getUpdateList(),
                 task.getOwner()
 
-
-
         );
     }
 
+    private Difficulty mapDifficultyFromEstimation(Task task) {
+        int sumEstimation = task.getEstimationA()+task.getEstimationB()+task.getEstimationC();
+        if (sumEstimation < 2){
+            return Difficulty.EASY ;
+        }
+        else if (sumEstimation>=2 && sumEstimation <= 4){
 
+            return Difficulty.MEDIUM;
+        }
+        else {
 
+            return Difficulty.HARD;
+        }
+    }
 }

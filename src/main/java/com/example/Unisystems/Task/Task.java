@@ -6,11 +6,12 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name="Task")
 public class Task {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String title;
     private String desc;
@@ -18,9 +19,11 @@ public class Task {
     private int estimationB;
     private int estimationC;
     private  TaskStatus   status;
+
+    @ElementCollection
     private List<String> updateList;
 
-    @ManyToMany
+    @ManyToOne
     private Employee owner;
 
 

@@ -7,10 +7,12 @@ import com.example.Unisystems.Task.Task;
 import com.example.Unisystems.Unit.Unit;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name="Employee")
 public class Employee {
 
     @Id
@@ -39,11 +41,12 @@ public class Employee {
     @ManyToOne
     private Unit unit;
 
-    private List<Task> tasksOwned;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<Task> tasks=new ArrayList<Task>();
 
     private String position;
 
-    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasksOwned, String position) {
+    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasks, String position) {
         this.recordNumber = recordNumber;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -57,7 +60,7 @@ public class Employee {
         this.businessUnit = businessUnit;
         this.department = department;
         this.unit = unit;
-        this.tasksOwned = tasksOwned;
+        this.tasks = tasks;
         this.position = position;
     }
 
@@ -186,10 +189,10 @@ public class Employee {
     }
 
     public List<Task> getTasksOwned() {
-        return tasksOwned;
+        return tasks;
     }
 
     public void setTasksOwned(List<Task> tasksOwned) {
-        this.tasksOwned = tasksOwned;
+        this.tasks = tasksOwned;
     }
 }
