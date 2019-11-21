@@ -14,7 +14,7 @@ public class TaskMapper {
                 mapDifficultyFromEstimation(task),
                 task.getStatus(),
                 task.getUpdateList(),
-                task.getOwner()
+                task.getAssignedEmployees()
 
         );
     }

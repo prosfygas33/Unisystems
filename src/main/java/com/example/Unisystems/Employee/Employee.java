@@ -41,7 +41,7 @@ public class Employee {
     @ManyToOne
     private Unit unit;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+   @OneToMany(/*mappedBy = "owner",*/cascade = CascadeType.ALL)
     private List<Task> tasks=new ArrayList<Task>();
 
     private String position;
@@ -188,11 +188,19 @@ public class Employee {
         this.position = position;
     }
 
-    public List<Task> getTasksOwned() {
+   /* public List<Task> getTasksOwned() {
         return tasks;
     }
 
     public void setTasksOwned(List<Task> tasksOwned) {
         this.tasks = tasksOwned;
+    }*/
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }

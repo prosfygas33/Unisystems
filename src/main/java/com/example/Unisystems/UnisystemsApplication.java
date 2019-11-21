@@ -84,7 +84,7 @@ public class UnisystemsApplication implements CommandLineRunner {
 
 		List<String> updateList =new ArrayList<>();
 
-		Task task1=new Task("Java app","Tournament",5,4,3, TaskStatus.DONE,updateList,null);
+		Task task1=new Task("Java app","Tournament",5,4,3, TaskStatus.DONE,null,null);
 		taskRepository.save(task1);
 
 

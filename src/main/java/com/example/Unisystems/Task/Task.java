@@ -19,23 +19,24 @@ public class Task {
     private int estimationB;
     private int estimationC;
     private  TaskStatus   status;
+    private List<Employee> assignedEmployees;
 
     @ElementCollection
     private List<String> updateList;
 
-    @ManyToOne
-    private Employee owner;
+    //@ManyToOne
+   // private Employee owner;
 
 
-    public Task(String title, String desc, int estimationA, int estimationB, int estimationC, TaskStatus status, List<String> updateList, Employee owner) {
+    public Task(String title, String desc, int estimationA, int estimationB, int estimationC, TaskStatus status, List<Employee> assignedEmployees, List<String> updateList) {
         this.title = title;
         this.desc = desc;
         this.estimationA = estimationA;
         this.estimationB = estimationB;
         this.estimationC = estimationC;
         this.status = status;
+        this.assignedEmployees = assignedEmployees;
         this.updateList = updateList;
-        this.owner = owner;
     }
 
     public Task(){
@@ -97,19 +98,19 @@ public class Task {
         this.status = status;
     }
 
+    public List<Employee> getAssignedEmployees() {
+        return assignedEmployees;
+    }
+
+    public void setAssignedEmployees(List<Employee> assignedEmployees) {
+        this.assignedEmployees = assignedEmployees;
+    }
+
     public List<String> getUpdateList() {
         return updateList;
     }
 
     public void setUpdateList(List<String> updateList) {
         this.updateList = updateList;
-    }
-
-    public Employee getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Employee owner) {
-        this.owner = owner;
     }
 }

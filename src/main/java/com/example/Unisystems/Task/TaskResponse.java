@@ -16,16 +16,18 @@ public class TaskResponse {
     private Difficulty   difficultyEstimation;
     private  TaskStatus   status;
     private List<String> UpdateList;
-    private Employee owner;
+    private List<Employee> assignedEmployees;
+    //private Employee owner;
 
-    public TaskResponse(long id, String title, String desc, Difficulty difficultyEstimation, TaskStatus status, List<String> updateList, Employee owner) {
+
+    public TaskResponse(long id, String title, String desc, Difficulty difficultyEstimation, TaskStatus status, List<String> updateList, List<Employee> assignedEmployees) {
         this.id = id;
         this.title = title;
         this.desc = desc;
         this.difficultyEstimation = difficultyEstimation;
         this.status = status;
         UpdateList = updateList;
-        this.owner = owner;
+        this.assignedEmployees = assignedEmployees;
     }
 
     public long getId() {
@@ -76,12 +78,12 @@ public class TaskResponse {
         UpdateList = updateList;
     }
 
-    public Employee getOwner() {
-        return owner;
+    public List<Employee> getAssignedEmployees() {
+        return assignedEmployees;
     }
 
-    public void setOwner(Employee owner) {
-        this.owner = owner;
+    public void setAssignedEmployees(List<Employee> assignedEmployees) {
+        this.assignedEmployees = assignedEmployees;
     }
 }
 
