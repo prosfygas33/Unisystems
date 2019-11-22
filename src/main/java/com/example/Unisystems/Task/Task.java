@@ -1,6 +1,7 @@
 package com.example.Unisystems.Task;
 
 import com.example.Unisystems.Employee.Employee;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,10 +25,10 @@ public class Task {
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
-                    CascadeType.PERSIST,
                     CascadeType.MERGE
             },
             mappedBy = "tasks")
+    @JsonIgnore
     private List<Employee> assignedEmployees = new ArrayList<>();
 
     @ElementCollection
@@ -37,7 +38,7 @@ public class Task {
    // private Employee owner;
 
 
-    public Task(String title, String desc, int estimationA, int estimationB, int estimationC, TaskStatus status, List<Employee> assignedEmployees) {
+    public Task(String title, String desc, int estimationA, int estimationB, int estimationC, TaskStatus status, List<Employee> assignedEmployees,List<String> updateList) {
         this.title = title;
         this.desc = desc;
         this.estimationA = estimationA;
@@ -45,6 +46,7 @@ public class Task {
         this.estimationC = estimationC;
         this.status = status;
         this.assignedEmployees = assignedEmployees;
+        this.updateList = updateList;
     }
 
     public Task(){

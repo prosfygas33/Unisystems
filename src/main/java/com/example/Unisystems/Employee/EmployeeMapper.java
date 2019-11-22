@@ -18,6 +18,7 @@ public class EmployeeMapper {
                 employee.isStatus() ? Status.ACTIVE : Status.INACTIVE,
                 employee.isContactType() ? "ACTIVE" : "EXTERNAL",
                 employee.getPosition(),
+                employee.getTasks(),
                 employee.getUnit().getName()
         );
     }

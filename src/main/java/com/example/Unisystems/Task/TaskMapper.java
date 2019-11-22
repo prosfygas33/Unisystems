@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class TaskMapper {
 
 
-    public TaskResponse mapTasResponseFromTask(Task task){
+    public TaskResponse mapTaskResponseFromTask(Task task){
         return new TaskResponse(
                 task.getId(),
                 task.getTitle(),
@@ -15,7 +15,6 @@ public class TaskMapper {
                 task.getStatus(),
                 task.getUpdateList(),
                 task.getAssignedEmployees()
-
         );
     }
 

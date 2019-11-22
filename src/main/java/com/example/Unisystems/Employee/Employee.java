@@ -5,6 +5,7 @@ import com.example.Unisystems.Company.Company;
 import com.example.Unisystems.Department.Department;
 import com.example.Unisystems.Task.Task;
 import com.example.Unisystems.Unit.Unit;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -45,7 +46,6 @@ public class Employee {
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
-                    CascadeType.PERSIST,
                     CascadeType.MERGE
             })
     @JoinTable(name = "employees_tasks",

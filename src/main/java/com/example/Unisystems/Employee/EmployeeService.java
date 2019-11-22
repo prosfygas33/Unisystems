@@ -36,6 +36,7 @@ public class EmployeeService {
     public List<EmployeeResponse> getAllEmployees() {
         Iterable<Employee> retrieveEmployees = repository.findAll();
         List<EmployeeResponse> employees = new ArrayList<>();
+        
         for(Employee employee: retrieveEmployees){
             employees.add(mapper.mapEmployeeResponseFromEmployee(employee));
         }
@@ -45,10 +46,10 @@ public class EmployeeService {
     public GenericResponse<List<EmployeeResponse>>getAllEmployeesById(Long id) {
         Iterable<Employee> retrieveEmployees = repository.findAll();
         List<EmployeeResponse> employees = new ArrayList<>();
+
         for(Employee employee: retrieveEmployees){
             if(id == employee.getId())
                 employees.add(mapper.mapEmployeeResponseFromEmployee(employee));
-
         }
         if(employees.isEmpty())  return new GenericResponse<>(new Error(0,"Not Found", "No employee record exist for given id " + id));
         return new GenericResponse<>(employees);
