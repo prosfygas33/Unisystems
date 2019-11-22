@@ -45,7 +45,6 @@ public class Task {
         this.estimationC = estimationC;
         this.status = status;
         this.assignedEmployees = assignedEmployees;
-
     }
 
     public Task(){

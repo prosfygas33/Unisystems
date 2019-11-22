@@ -20,14 +20,13 @@ public class TaskService {
     private TaskMapper mapper;
 
     public GenericResponse<List<TaskResponse>>getAllTasksById(Long id){
-        Iterable<Task> retrieveTasks=taskRepository.findAll();
-        List<TaskResponse> tasks=new ArrayList<>();
+        Iterable<Task> retrieveTasks = taskRepository.findAll();
+        List<TaskResponse> tasks = new ArrayList<>();
         for (Task task: retrieveTasks){
-            if(id==task.getId())
-
+            if(id == task.getId())
                tasks.add(mapper.mapTasResponseFromTask(task)) ;
         }
-        if(tasks.isEmpty())  return new GenericResponse<>(new Error(0,"Not Found", "No Task record exist for given id " + id));
+        if(tasks.isEmpty()) return new GenericResponse<>(new Error(0,"Not Found", "No Task record exist for given id " + id));
         return new GenericResponse<>(tasks);
 
 

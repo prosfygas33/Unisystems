@@ -13,9 +13,9 @@ public class TaskResponse {
     private long id;
     private String title;
     private String desc;
-    private Difficulty   difficultyEstimation;
-    private  TaskStatus   status;
-    private List<String> UpdateList;
+    private String difficultyEstimation;
+    private String status;
+    private List<String> updateList;
     private List<Employee> assignedEmployees;
     //private Employee owner;
 
@@ -24,9 +24,21 @@ public class TaskResponse {
         this.id = id;
         this.title = title;
         this.desc = desc;
-        this.difficultyEstimation = difficultyEstimation;
-        this.status = status;
-        UpdateList = updateList;
+        if ( difficultyEstimation == Difficulty.EASY){
+            this.difficultyEstimation = "EASY";
+        }else if ( difficultyEstimation == Difficulty.MEDIUM){
+            this.difficultyEstimation = "MEDIUM";
+        }else {
+            this.difficultyEstimation = "HARD";
+        }
+        if ( status == TaskStatus.NEW ){
+            this.status = "NEW";
+        }else if ( status == TaskStatus.STARTED ){
+            this.status = "STARTED";
+        }else{
+            this.status = "DONE";
+        }
+        this.updateList = updateList;
         this.assignedEmployees = assignedEmployees;
     }
 
@@ -54,28 +66,40 @@ public class TaskResponse {
         this.desc = desc;
     }
 
-    public Difficulty getDifficultyEstimation() {
+    public String getDifficultyEstimation() {
         return difficultyEstimation;
     }
 
     public void setDifficultyEstimation(Difficulty difficultyEstimation) {
-        this.difficultyEstimation = difficultyEstimation;
+        if ( difficultyEstimation == Difficulty.EASY){
+            this.difficultyEstimation = "EASY";
+        }else if ( difficultyEstimation == Difficulty.MEDIUM){
+            this.difficultyEstimation = "MEDIUM";
+        }else{
+            this.difficultyEstimation = "HARD";
+        }
     }
 
-    public TaskStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
     public void setStatus(TaskStatus status) {
-        this.status = status;
+        if ( status == TaskStatus.NEW ){
+            this.status = "NEW";
+        }else if ( status == TaskStatus.STARTED ){
+            this.status = "STARTED";
+        }else{
+            this.status = "DONE";
+        }
     }
 
     public List<String> getUpdateList() {
-        return UpdateList;
+        return updateList;
     }
 
     public void setUpdateList(List<String> updateList) {
-        UpdateList = updateList;
+        this.updateList = updateList;
     }
 
     public List<Employee> getAssignedEmployees() {

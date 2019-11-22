@@ -19,9 +19,9 @@ public class TaskController {
     @Autowired
     TaskService taskService;
 
-    @GetMapping("/task{taskid}")
+    @GetMapping("/task/{taskid}")
     public ResponseEntity getAllTasksById(@PathVariable Long id){
-        GenericResponse<List<TaskResponse>> response=taskService.getAllTasksById(id);
+        GenericResponse<List<TaskResponse>> response = taskService.getAllTasksById(id);
 
         if(response.getError() != null){
             return new ResponseEntity<>(response.getError(),
@@ -32,9 +32,6 @@ public class TaskController {
                 null,
                 HttpStatus.OK);
     }
-
-
-
-    }
+}
 
 
