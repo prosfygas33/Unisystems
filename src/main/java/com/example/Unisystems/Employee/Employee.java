@@ -17,7 +17,9 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_id")
     private long id;
+
     private  int recordNumber;
     private String firstname;
     private String lastname;
@@ -41,8 +43,15 @@ public class Employee {
     @ManyToOne
     private Unit unit;
 
-   @OneToMany(/*mappedBy = "owner",*/cascade = CascadeType.ALL)
-    private List<Task> tasks=new ArrayList<Task>();
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "employees_tasks",
+            joinColumns = { @JoinColumn(name = "employee_id") },
+            inverseJoinColumns = { @JoinColumn(name = "task_id") })
+    private List<Task> tasks = new ArrayList();
 
     private String position;
 

@@ -3,6 +3,7 @@ package com.example.Unisystems.Task;
 import com.example.Unisystems.Employee.Employee;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,23 +13,31 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "task_id")
     private long id;
     private String title;
     private String desc;
     private int estimationA;
     private int estimationB;
     private int estimationC;
-    private  TaskStatus   status;
-    private List<Employee> assignedEmployees;
+    private TaskStatus status;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "tasks")
+    private List<Employee> assignedEmployees = new ArrayList<>();
 
     @ElementCollection
-    private List<String> updateList;
+    private List<String> updateList = new ArrayList<>();
 
     //@ManyToOne
    // private Employee owner;
 
 
-    public Task(String title, String desc, int estimationA, int estimationB, int estimationC, TaskStatus status, List<Employee> assignedEmployees, List<String> updateList) {
+    public Task(String title, String desc, int estimationA, int estimationB, int estimationC, TaskStatus status, List<Employee> assignedEmployees) {
         this.title = title;
         this.desc = desc;
         this.estimationA = estimationA;
@@ -36,7 +45,7 @@ public class Task {
         this.estimationC = estimationC;
         this.status = status;
         this.assignedEmployees = assignedEmployees;
-        this.updateList = updateList;
+
     }
 
     public Task(){
