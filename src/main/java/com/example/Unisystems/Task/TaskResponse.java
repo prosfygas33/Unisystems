@@ -20,24 +20,12 @@ public class TaskResponse {
     //private Employee owner;
 
 
-    public TaskResponse(long id, String title, String desc, Difficulty difficultyEstimation, TaskStatus status, List<String> updateList, List<Employee> assignedEmployees) {
+    public TaskResponse(long id, String title, String desc, String difficultyEstimation, String status, List<String> updateList, List<Employee> assignedEmployees) {
         this.id = id;
         this.title = title;
         this.desc = desc;
-        if ( difficultyEstimation == Difficulty.EASY){
-            this.difficultyEstimation = "EASY";
-        }else if ( difficultyEstimation == Difficulty.MEDIUM){
-            this.difficultyEstimation = "MEDIUM";
-        }else {
-            this.difficultyEstimation = "HARD";
-        }
-        if ( status == TaskStatus.NEW ){
-            this.status = "NEW";
-        }else if ( status == TaskStatus.STARTED ){
-            this.status = "STARTED";
-        }else{
-            this.status = "DONE";
-        }
+        this.difficultyEstimation = difficultyEstimation;
+        this.status = status;
         this.updateList = updateList;
         this.assignedEmployees = assignedEmployees;
     }
@@ -70,28 +58,16 @@ public class TaskResponse {
         return difficultyEstimation;
     }
 
-    public void setDifficultyEstimation(Difficulty difficultyEstimation) {
-        if ( difficultyEstimation == Difficulty.EASY){
-            this.difficultyEstimation = "EASY";
-        }else if ( difficultyEstimation == Difficulty.MEDIUM){
-            this.difficultyEstimation = "MEDIUM";
-        }else{
-            this.difficultyEstimation = "HARD";
-        }
+    public void setDifficultyEstimation(String difficultyEstimation) {
+        this.difficultyEstimation = difficultyEstimation;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(TaskStatus status) {
-        if ( status == TaskStatus.NEW ){
-            this.status = "NEW";
-        }else if ( status == TaskStatus.STARTED ){
-            this.status = "STARTED";
-        }else{
-            this.status = "DONE";
-        }
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public List<String> getUpdateList() {

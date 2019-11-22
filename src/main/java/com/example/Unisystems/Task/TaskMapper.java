@@ -11,8 +11,8 @@ public class TaskMapper {
                 task.getId(),
                 task.getTitle(),
                 task.getDesc(),
-                mapDifficultyFromEstimation(task),
-                task.getStatus(),
+                mapDifficultyFromEstimation(task).toString(),
+                task.getStatus().toString(),
                 task.getUpdateList(),
                 task.getAssignedEmployees()
         );
