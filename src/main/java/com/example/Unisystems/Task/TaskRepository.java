@@ -8,12 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TaskRepository extends CrudRepository<Task,Long> {
 
-    @Override
-    @RestResource(exported = false)
-    void delete(Task entity);
-
-    @Override
-    @RestResource(exported = false)
-    void deleteById(Long aLong);
-
 }

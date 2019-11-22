@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskMapper {
 
-
     public TaskResponse mapTaskResponseFromTask(Task task){
         return new TaskResponse(
                 task.getId(),
@@ -30,6 +29,30 @@ public class TaskMapper {
         else {
 
             return Difficulty.HARD;
+        }
+    }
+
+    public Task mapTaskFromTaskRequest(TaskRequest taskRequest) {
+        return new Task(
+                taskRequest.getTitle(),
+                taskRequest.getDesc(),
+                taskRequest.getEstimationA(),
+                taskRequest.getEstimationB(),
+                taskRequest.getEstimationC(),
+                mapStatus(taskRequest.getStatus()),
+                null,
+                null
+        );
+    }
+
+    private TaskStatus mapStatus(String status){
+        if (status.equalsIgnoreCase("NEW")){
+            return TaskStatus.NEW;
+        }else if ( status.equalsIgnoreCase("STARTED")){
+            return TaskStatus.STARTED;
+        }else{
+            // Θέλει κι άλλο έλεγγο σε περίπτωση άκυρης τιμής.
+            return TaskStatus.DONE;
         }
     }
 }

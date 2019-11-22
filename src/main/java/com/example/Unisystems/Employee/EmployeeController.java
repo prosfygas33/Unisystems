@@ -25,8 +25,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
-    public ResponseEntity getAllEmployeesById(@PathVariable Long id){
-        GenericResponse<List<EmployeeResponse>> response = service.getAllEmployeesById(id);
+    public ResponseEntity getAllEmployeesByUnitId(@PathVariable Long id){
+        GenericResponse<List<EmployeeResponse>> response = service.getAllEmployeesByUnitId(id);
 
         if(response.getError() != null){
             return new ResponseEntity<>(response.getError(),
