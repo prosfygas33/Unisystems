@@ -19,9 +19,9 @@ public class TaskController {
     @Autowired
     TaskRepository taskRepository;
 
-    @GetMapping("/task/{taskid}")
-    public ResponseEntity getTaskById(@PathVariable Long id){
-        GenericResponse<TaskResponse> response = taskService.getTaskById(id);
+    @GetMapping("/task/{taskId}")
+    public ResponseEntity getTaskById(@PathVariable Long taskId){
+        GenericResponse<TaskResponse> response = taskService.getTaskById(taskId);
 
         if(response.getError() != null){
             return new ResponseEntity<>(
@@ -51,7 +51,7 @@ public class TaskController {
                 HttpStatus.OK);
     }
 
-    @PutMapping("/task/{id}")
+    /*@PutMapping("/task/{id}")
     public Task replaceTask(@RequestBody Task updatedTask, @PathVariable Long id) {
 
         return taskRepository.findById(id)
@@ -71,7 +71,7 @@ public class TaskController {
                     return taskRepository.save(updatedTask);
                 });
     }
-
+    */
     @DeleteMapping("/task/{id}")
     public void deleteEmployee(@PathVariable Long id) {
         taskRepository.deleteById(id);

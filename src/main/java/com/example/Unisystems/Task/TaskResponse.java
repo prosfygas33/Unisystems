@@ -10,17 +10,15 @@ import java.util.List;
 
 public class TaskResponse {
 
-    private long id;
+    private Long id;
     private String title;
     private String desc;
     private String difficultyEstimation;
     private String status;
     private List<String> updateList;
     private List<Employee> assignedEmployees;
-    //private Employee owner;
 
-
-    public TaskResponse(long id, String title, String desc, String difficultyEstimation, String status, List<String> updateList, List<Employee> assignedEmployees) {
+    public TaskResponse(Long id, String title, String desc, String difficultyEstimation, String status, List<String> updateList, List<Employee> assignedEmployees) {
         this.id = id;
         this.title = title;
         this.desc = desc;
@@ -30,11 +28,11 @@ public class TaskResponse {
         this.assignedEmployees = assignedEmployees;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

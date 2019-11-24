@@ -13,9 +13,9 @@ public class Task {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
-    private long id;
+    private Long id;
     private String title;
     private String desc;
     private int estimationA;
@@ -34,10 +34,6 @@ public class Task {
     @ElementCollection
     private List<String> updateList = new ArrayList<>();
 
-    //@ManyToOne
-   // private Employee owner;
-
-
     public Task(String title, String desc, int estimationA, int estimationB, int estimationC, TaskStatus status, List<Employee> assignedEmployees,List<String> updateList) {
         this.title = title;
         this.desc = desc;
@@ -52,11 +48,11 @@ public class Task {
     public Task(){
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
