@@ -55,4 +55,12 @@ public class TaskMapper {
             return TaskStatus.DONE;
         }
     }
+
+
+    private String mapTaskFromDifficulty(Task task){
+
+        return String.valueOf((task));
+
+    }
+
 }

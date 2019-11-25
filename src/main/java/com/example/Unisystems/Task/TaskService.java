@@ -44,5 +44,17 @@ public class TaskService {
     }
 
 
+   /* public GenericResponse<String> getStatusDifficulty(Difficulty difficulty) {
 
+        Iterable<Task> retrievedTasks = taskRepository.findAll();
+        TaskResponse taskResponse = null;
+
+        for (Task task: retrievedTasks){
+            if(String.valueOf(mapTaskFromDifficulty(task).equalsIgnoreCase(difficulty))
+                taskResponse = mapper.mapTaskResponseFromTask(task);
+        }
+        if(taskResponse == null) return new GenericResponse<>(new Error(0,"Not Found", "No Task record exist for given id " + id));
+        return new GenericResponse<>(taskResponse);
+
+    }*/
 }
