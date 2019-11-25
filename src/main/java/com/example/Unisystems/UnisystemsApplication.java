@@ -101,17 +101,24 @@ public class UnisystemsApplication implements CommandLineRunner {
 		privilegeRepository.save(readPrivilege);
 		privilegeRepository.save(writePrivilege);
 
+		List<Privilege> adminPrivileges = new ArrayList<>();
+		adminPrivileges.add(readPrivilege);
+		adminPrivileges.add(writePrivilege);
 
-		Role adminRole = new Role(RoleAssignment.ADMIN,List<Privilege>(readPrivilege,writePrivilege);
-		Role userRole = new Role(RoleAssignment.USER,null);
+		List<Privilege> userPrivileges = new ArrayList<>();
+		userPrivileges.add(readPrivilege);
+
+
+		Role adminRole = new Role(RoleAssignment.ADMIN,adminPrivileges);
+		Role userRole = new Role(RoleAssignment.USER,userPrivileges);
 		roleRepository.save(adminRole);
 		roleRepository.save(userRole);
 
 
 		Employee emp1 = new Employee(111, "Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, c1, b1, d2, u4, taskList, "Junior Developer",adminRole);
-		employees = new ArrayList<>();
-		employees.add(emp1);
-		task1.setAssignedEmployees(employees);
+		//employees = new ArrayList<>();
+		//employees.add(emp1);
+		//task1.setAssignedEmployees(employees);
 		Employee emp2 = new Employee(122, "Petros", "Euthimiou", "Spetson 17", "2108834081", new Date(111, 5, 15), new Date(), true, true, c1, b1, d3, u5, null, "Senior Developer", userRole);
 		Employee emp3 = new Employee(123, "Mitsos", "Kitsou", "Spartis 25", "2108855284", new Date(110, 11, 5), new Date(), true, true, c1, b1, d1, u2, null, "Hr officer",userRole);
 		Employee emp4 = new Employee(124, "Kostas", "Fleggas", "Tsoxa 13", "2107440081", new Date(112, 7, 15), new Date(), true, true, c1, b1, d3, u5, null, " Manager",userRole);

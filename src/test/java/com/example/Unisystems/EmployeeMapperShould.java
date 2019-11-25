@@ -8,11 +8,15 @@ import com.example.Unisystems.Employee.Employee;
 import com.example.Unisystems.Employee.EmployeeMapper;
 import com.example.Unisystems.Employee.EmployeeResponse;
 import com.example.Unisystems.Employee.Status;
+import com.example.Unisystems.RoleAuthentication.Privilege;
+import com.example.Unisystems.RoleAuthentication.Role;
+import com.example.Unisystems.RoleAuthentication.RoleAssignment;
 import com.example.Unisystems.Unit.Unit;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class  EmployeeMapperShould {
@@ -26,6 +30,8 @@ public class  EmployeeMapperShould {
     private Department department;
     private BusinessUnit businessUnit;
     private Company company;
+    private Role role;
+    private Privilege
 
     @Before
     public void setUp(){
@@ -38,8 +44,10 @@ public class  EmployeeMapperShould {
         department = new Department("DepartmentName",businessUnit);
         department.setId((long) 1);
         unit = new Unit("UnitName",department);
+        role = new Role(RoleAssignment.ADMIN,role.setPrivileges();
+        role.setId((long) 1);
         unit.setId(1);
-        employeeInput = new Employee(1,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, company, businessUnit, department, unit,null, "Junior Developer");
+        employeeInput = new Employee(1,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, company, businessUnit, department, unit,null, "Junior Developer",role);
         employeeInput.setId(10);
 
         employeeResponseOutput = employeeMapper.mapEmployeeResponseFromEmployee(employeeInput);
