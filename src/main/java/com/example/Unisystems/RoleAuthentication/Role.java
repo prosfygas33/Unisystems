@@ -4,6 +4,7 @@ import com.example.Unisystems.Employee.Employee;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Role {
@@ -14,8 +15,8 @@ public class Role {
 
     private RoleAssignment name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Collection<Employee> employee;
+    //@ManyToMany(mappedBy = "roles")
+    //private List<Employee> employees;
 
     @ManyToMany
     @JoinTable(
@@ -24,12 +25,10 @@ public class Role {
                     name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "privilege_id", referencedColumnName = "id"))
-    private Collection<Privilege> privileges;
+    private List<Privilege> privileges;
 
-
-    public Role(RoleAssignment name, Collection<Employee> employee, Collection<Privilege> privileges) {
+    public Role(RoleAssignment name, List<Privilege> privileges) {
         this.name = name;
-        this.employee = employee;
         this.privileges = privileges;
     }
 
@@ -49,19 +48,11 @@ public class Role {
         this.name = name;
     }
 
-    public Collection<Employee> getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Collection<Employee> employee) {
-        this.employee = employee;
-    }
-
-    public Collection<Privilege> getPrivileges() {
+    public List<Privilege> getPrivileges() {
         return privileges;
     }
 
-    public void setPrivileges(Collection<Privilege> privileges) {
+    public void setPrivileges(List<Privilege> privileges) {
         this.privileges = privileges;
     }
 }

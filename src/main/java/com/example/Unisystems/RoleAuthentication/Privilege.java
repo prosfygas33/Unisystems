@@ -2,6 +2,7 @@ package com.example.Unisystems.RoleAuthentication;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Privilege {
@@ -12,20 +13,12 @@ public class Privilege {
 
     private String name;
 
-    @ManyToMany(mappedBy = "privileges")
-    private Collection<Role> roles;
+   // @ManyToMany(mappedBy = "privileges")
+ //   private List<Role> roles;
 
-    public Privilege(String name, Collection<Role> roles) {
+
+    public Privilege(String name) {
         this.name = name;
-        this.roles = roles;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -34,13 +27,5 @@ public class Privilege {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Collection<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
     }
 }

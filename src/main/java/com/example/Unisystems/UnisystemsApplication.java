@@ -8,6 +8,7 @@ import com.example.Unisystems.Department.Department;
 import com.example.Unisystems.Department.DepartmentRepository;
 import com.example.Unisystems.Employee.Employee;
 import com.example.Unisystems.Employee.EmployeeRepository;
+import com.example.Unisystems.RoleAuthentication.*;
 import com.example.Unisystems.Task.Task;
 import com.example.Unisystems.Task.TaskRepository;
 import com.example.Unisystems.Task.TaskStatus;
@@ -40,6 +41,12 @@ public class UnisystemsApplication implements CommandLineRunner {
 
 	@Autowired
 	TaskRepository taskRepository;
+
+	@Autowired
+	RoleRepository roleRepository;
+
+	@Autowired
+	PrivilegeRepository privilegeRepository;
 
 	public static void main(java.lang.String[] args) {
 		SpringApplication.run(UnisystemsApplication.class, args);
@@ -84,19 +91,31 @@ public class UnisystemsApplication implements CommandLineRunner {
 
 		List<String> updateList = new ArrayList<>();
 
-		Task task1 = new Task("Java app","Tournament",5,4,3, TaskStatus.DONE,null,updateList);
+		Task task1 = new Task("Java app", "Tournament", 5, 4, 3, TaskStatus.DONE, null, updateList);
 		List<Task> taskList = new ArrayList<>();
 		taskList.add(task1);
 		taskRepository.save(task1);
 
-		Employee emp1 = new Employee(111,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, c1, b1, d2, u4,taskList,"Junior Developer");
-		List<Employee> employees = new ArrayList<>();
+		Privilege readPrivilege = new Privilege("Read");
+		Privilege writePrivilege = new Privilege("Write");
+		privilegeRepository.save(readPrivilege);
+		privilegeRepository.save(writePrivilege);
+
+
+		Role adminRole = new Role(RoleAssignment.ADMIN,List<Privilege>(readPrivilege,writePrivilege);
+		Role userRole = new Role(RoleAssignment.USER,null);
+		roleRepository.save(adminRole);
+		roleRepository.save(userRole);
+
+
+		Employee emp1 = new Employee(111, "Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, c1, b1, d2, u4, taskList, "Junior Developer",adminRole);
+		employees = new ArrayList<>();
 		employees.add(emp1);
 		task1.setAssignedEmployees(employees);
-		Employee emp2 = new Employee(122,"Petros", "Euthimiou", "Spetson 17", "2108834081", new Date(111, 5, 15), new Date(), true, true, c1, b1, d3, u5, null,"Senior Developer");
-		Employee emp3 = new Employee(123,"Mitsos", "Kitsou", "Spartis 25", "2108855284", new Date(110, 11, 5), new Date(), true, true, c1, b1, d1, u2,null ,"Hr officer");
-		Employee emp4 = new Employee(124,"Kostas", "Fleggas", "Tsoxa 13", "2107440081", new Date(112, 7, 15), new Date(), true, true, c1, b1, d3, u5, null," Manager");
-		Employee emp5 = new Employee(125,"George", "Dom", "Ymitou 40", "2105520081", new Date(112, 2, 15), new Date(), true, true, c1, b1, d2, u4, null," Mid-Senior Developer");
+		Employee emp2 = new Employee(122, "Petros", "Euthimiou", "Spetson 17", "2108834081", new Date(111, 5, 15), new Date(), true, true, c1, b1, d3, u5, null, "Senior Developer", userRole);
+		Employee emp3 = new Employee(123, "Mitsos", "Kitsou", "Spartis 25", "2108855284", new Date(110, 11, 5), new Date(), true, true, c1, b1, d1, u2, null, "Hr officer",userRole);
+		Employee emp4 = new Employee(124, "Kostas", "Fleggas", "Tsoxa 13", "2107440081", new Date(112, 7, 15), new Date(), true, true, c1, b1, d3, u5, null, " Manager",userRole);
+		Employee emp5 = new Employee(125, "George", "Dom", "Ymitou 40", "2105520081", new Date(112, 2, 15), new Date(), true, true, c1, b1, d2, u4, null, " Mid-Senior Developer",userRole);
 
 		employeeRepository.save(emp1);
 		employeeRepository.save(emp2);

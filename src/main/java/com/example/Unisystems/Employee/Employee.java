@@ -34,14 +34,7 @@ public class Employee {
     //True if type = Unisystems, false if type = external
     private boolean contactType;
 
-    @ManyToOne
-   @JoinTable(
-            name = "employees_roles",
-            joinColumns = @JoinColumn(
-                    name = "employee_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+
 
     @ManyToOne
     private Company company;
@@ -66,7 +59,16 @@ public class Employee {
 
     private String position;
 
-    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Collection<Role> roles, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasks, String position) {
+    @ManyToOne
+    @JoinTable(
+            name = "employees_roles",
+            joinColumns = @JoinColumn(
+                    name = "employee_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Role role;
+
+    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasks, String position, Role role) {
         this.recordNumber = recordNumber;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -76,18 +78,14 @@ public class Employee {
         this.endDate = endDate;
         this.status = status;
         this.contactType = contactType;
-        this.roles = roles;
         this.company = company;
         this.businessUnit = businessUnit;
         this.department = department;
         this.unit = unit;
         this.tasks = tasks;
         this.position = position;
+        this.role = role;
     }
-
-    public Employee(){
-    }
-
 
     public long getId() {
         return id;
@@ -169,14 +167,6 @@ public class Employee {
         this.contactType = contactType;
     }
 
-    public Collection<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
-    }
-
     public Company getCompany() {
         return company;
     }
@@ -223,5 +213,13 @@ public class Employee {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
