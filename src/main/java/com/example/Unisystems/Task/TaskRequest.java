@@ -1,25 +1,38 @@
 package com.example.Unisystems.Task;
 
-import com.example.Unisystems.Employee.Employee;
-
 import java.util.List;
 
 public class TaskRequest {
 
+    private Long id;
     private String title;
     private String desc;
     private int estimationA;
     private int estimationB;
     private int estimationC;
     private String status;
+    private List<Long> employeesIds;
 
-    public TaskRequest(String title, String desc, int estimationA, int estimationB, int estimationC, String status) {
+    public TaskRequest(Long id, String title, String desc, int estimationA, int estimationB, int estimationC, String status, List<Long> employeesIds) {
+        this.id = id;
         this.title = title;
         this.desc = desc;
         this.estimationA = estimationA;
         this.estimationB = estimationB;
         this.estimationC = estimationC;
         this.status = status;
+        this.employeesIds = employeesIds;
+    }
+
+    public TaskRequest() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -70,4 +83,11 @@ public class TaskRequest {
         this.status = status;
     }
 
+    public List<Long> getEmployeesIds() {
+        return employeesIds;
+    }
+
+    public void setEmployeesIds(List<Long> employeesIds) {
+        this.employeesIds = employeesIds;
+    }
 }

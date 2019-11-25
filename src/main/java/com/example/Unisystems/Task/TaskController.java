@@ -23,10 +23,10 @@ public class TaskController {
     TaskRepository taskRepository;
 
     @GetMapping("/task/{taskId}")
-    public ResponseEntity getTaskById(@PathVariable Long taskId){
+    public ResponseEntity getTaskById(@PathVariable Long taskId) {
         GenericResponse<TaskResponse> response = taskService.getTaskById(taskId);
 
-        if(response.getError() != null){
+        if (response.getError() != null) {
             return new ResponseEntity<>(
                     response.getError(),
                     null,
@@ -42,7 +42,7 @@ public class TaskController {
     public ResponseEntity createTask(@RequestBody TaskRequest taskRequest) {
         GenericResponse<String> response = taskService.createTask(taskRequest);
 
-        if(response.getError() != null){
+        if (response.getError() != null) {
             return new ResponseEntity<>(
                     response.getError(),
                     null,
@@ -55,22 +55,19 @@ public class TaskController {
     }
 
     @PutMapping("/task/{taskId}")
-    public ResponseEntity<Task> updateTask(@PathVariable(value = "taskId") Long taskId, @Valid @RequestBody Task taskDetails)
-            throws ResourceNotFoundException {
-
-        Task task=taskRepository.findById(taskId)
-                .orElseThrow(() -> new ResourceNotFoundException("Task not found for this id :: " + taskId));
-
-        task.setTitle(taskDetails.getTitle());
-        task.setTitle(taskDetails.getTitle());
-        task.setDesc(taskDetails.getDesc());
-        task.setEstimationB(taskDetails.getEstimationA());
-        task.setEstimationC(taskDetails.getEstimationC());
-        task.setStatus(taskDetails.getStatus());
-        task.setAssignedEmployees(taskDetails.getAssignedEmployees());
-        task.setUpdateList(taskDetails.getUpdateList());
-        final Task updateTask =taskRepository.save(task);
-        return  ResponseEntity.ok(updateTask);
+    public ResponseEntity updateTask(@PathVariable(value = "taskId") Long taskId, @Valid @RequestBody TaskRequest taskDetails)
+            throws RuntimeException {
+        GenericResponse<TaskResponse> response = taskService.updateTaskFromTaskRequest(taskDetails);
+        if (response.getError() != null) {
+            return new ResponseEntity<>(
+                    response.getError(),
+                    null,
+                    HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(
+                response.getData(),
+                null,
+                HttpStatus.OK);
 
     }
 

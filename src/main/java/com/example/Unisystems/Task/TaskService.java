@@ -1,6 +1,8 @@
 package com.example.Unisystems.Task;
 
 
+import com.example.Unisystems.Employee.Employee;
+import com.example.Unisystems.Employee.EmployeeRepository;
 import com.example.Unisystems.Employee.EmployeeResponse;
 import com.example.Unisystems.Error;
 import com.example.Unisystems.GenericResponse;
@@ -10,6 +12,8 @@ import sun.net.www.content.text.Generic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class TaskService {
@@ -18,43 +22,59 @@ public class TaskService {
     private TaskRepository taskRepository;
 
     @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
     private TaskMapper mapper;
 
-    public GenericResponse<TaskResponse>getTaskById(Long id){
+    public GenericResponse<TaskResponse> getTaskById(Long id) {
         Iterable<Task> retrievedTasks = taskRepository.findAll();
         TaskResponse taskResponse = null;
 
-        for (Task task: retrievedTasks){
-            if(id == task.getId())
+        for (Task task : retrievedTasks) {
+            if (task.getId().equals(id))
                 taskResponse = mapper.mapTaskResponseFromTask(task);
         }
-        if(taskResponse == null) return new GenericResponse<>(new Error(0,"Not Found", "No Task record exist for given id " + id));
+        if (taskResponse == null)
+            return new GenericResponse<>(new Error(0, "Not Found", "No Task record exist for given id " + id));
         return new GenericResponse<>(taskResponse);
     }
 
-    public GenericResponse<String> createTask(TaskRequest taskRequest){
+    public GenericResponse<String> createTask(TaskRequest taskRequest) {
         Task newTask = mapper.mapTaskFromTaskRequest(taskRequest);
-        try{
+        try {
             taskRepository.save(newTask);
             return new GenericResponse<>("Post Successful");
-        }catch (Exception e){
+        } catch (Exception e) {
             return new GenericResponse<>("Post UnSuccessful");
         }
 
     }
 
-
-   /* public GenericResponse<String> getStatusDifficulty(Difficulty difficulty) {
-
-        Iterable<Task> retrievedTasks = taskRepository.findAll();
-        TaskResponse taskResponse = null;
-
-        for (Task task: retrievedTasks){
-            if(String.valueOf(mapTaskFromDifficulty(task).equalsIgnoreCase(difficulty))
-                taskResponse = mapper.mapTaskResponseFromTask(task);
+    public GenericResponse<TaskResponse> updateTaskFromTaskRequest(TaskRequest taskRequest) {
+        Task task = taskRepository.findById(taskRequest.getId()).orElseThrow(()->new RuntimeException("There is no task with this id"));
+        Iterable<Employee> employeeList= employeeRepository.findAllById(taskRequest.getEmployeesIds());
+        ///Check if employees requested are in the same Unit by taking the distinct unit names
+        final List<String> distinctUnitNames = StreamSupport.stream(employeeList.spliterator(), false)
+                .map(employee -> employee.getUnit().getName())
+                .distinct()
+                .collect(Collectors.toList());
+        if(distinctUnitNames.size() > 1){
+            throw new RuntimeException("The employees not at the same Unit");
         }
-        if(taskResponse == null) return new GenericResponse<>(new Error(0,"Not Found", "No Task record exist for given id " + id));
-        return new GenericResponse<>(taskResponse);
+        final Task taskNew =  mapper.mapTaskFromTaskRequest(taskRequest);
+        task.setTitle(taskNew.getTitle());
+        task.setDesc(taskNew.getDesc());
+        task.setEstimationA(taskNew.getEstimationA());
+        task.setEstimationB(taskNew.getEstimationB());
+        task.setEstimationC(taskNew.getEstimationC());
+        List<Employee> employeeListNew = StreamSupport.stream(employeeList.spliterator(), false)
+                .collect(Collectors.toList());
+        task.getAssignedEmployees().clear();
+        task.setAssignedEmployees(employeeListNew);
+        taskRepository.save(task);
+        return getTaskById(task.getId());
+    }
 
-    }*/
+
 }
