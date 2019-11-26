@@ -15,6 +15,11 @@ public class UnitService {
     @Autowired
     UnitMapper unitMapper;
 
+    public UnitService(UnitRepository unitRepository, UnitMapper unitMapper) {
+        this.unitRepository = unitRepository;
+        this.unitMapper = unitMapper;
+    }
+
     public List<UnitResponse> getUnits(){
         Iterable<Unit> retrievedUnits = unitRepository.findAll();
         List<UnitResponse> units = new ArrayList<>();
