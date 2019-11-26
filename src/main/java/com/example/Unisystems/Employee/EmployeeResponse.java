@@ -1,5 +1,9 @@
 package com.example.Unisystems.Employee;
 
+import com.example.Unisystems.Task.Task;
+
+import java.util.List;
+
 public class EmployeeResponse {
 
     private long id;
@@ -10,9 +14,10 @@ public class EmployeeResponse {
     private Status status;
     private String contactType;
     private String position;
+    private List<Task> tasks;
     private String unitName;
 
-    public EmployeeResponse(long id, long recordNumber, String fullName, String telephone, String workingPeriod, Status status, String contactType, String position, String unitName) {
+    public EmployeeResponse(long id, long recordNumber, String fullName, String telephone, String workingPeriod, Status status, String contactType, String position,List<Task> tasks, String unitName) {
         this.id = id;
         this.recordNumber = recordNumber;
         this.fullName = fullName;
@@ -21,9 +26,18 @@ public class EmployeeResponse {
         this.status = status;
         this.contactType = contactType;
         this.position = position;
+        this.tasks = tasks;
         this.unitName = unitName;
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+    
     public long getId() {
         return id;
     }

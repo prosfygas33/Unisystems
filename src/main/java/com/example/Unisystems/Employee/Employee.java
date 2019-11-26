@@ -3,11 +3,14 @@ package com.example.Unisystems.Employee;
 import com.example.Unisystems.BusinessUnit.BusinessUnit;
 import com.example.Unisystems.Company.Company;
 import com.example.Unisystems.Department.Department;
+import com.example.Unisystems.RoleAuthentication.Role;
 import com.example.Unisystems.Task.Task;
 import com.example.Unisystems.Unit.Unit;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +20,9 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_id")
     private long id;
+
     private  int recordNumber;
     private String firstname;
     private String lastname;
@@ -28,6 +33,8 @@ public class Employee {
     private boolean status;
     //True if type = Unisystems, false if type = external
     private boolean contactType;
+
+
 
     @ManyToOne
     private Company company;
@@ -41,12 +48,33 @@ public class Employee {
     @ManyToOne
     private Unit unit;
 
-   @OneToMany(/*mappedBy = "owner",*/cascade = CascadeType.ALL)
-    private List<Task> tasks=new ArrayList<Task>();
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "employees_tasks",
+            joinColumns = { @JoinColumn(name = "employee_id") },
+            inverseJoinColumns = { @JoinColumn(name = "task_id") })
+    private List<Task> tasks = new ArrayList();
 
     private String position;
 
-    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasks, String position) {
+    @ManyToOne
+   @JoinTable(name = "employees_roles",
+    joinColumns = {@JoinColumn(name="employee_id")},
+            inverseJoinColumns ={ @JoinColumn(name = "role_id") })
+
+          /*  name = "employees_roles",
+            joinColumns = @JoinColumn(
+                                name = "employee_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))*/
+    private Role role;
+
+    public Employee() {
+    }
+
+    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasks, String position, Role role) {
         this.recordNumber = recordNumber;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -62,11 +90,8 @@ public class Employee {
         this.unit = unit;
         this.tasks = tasks;
         this.position = position;
+        this.role = role;
     }
-
-    public Employee(){
-    }
-
 
     public long getId() {
         return id;
@@ -180,6 +205,14 @@ public class Employee {
         this.unit = unit;
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     public String getPosition() {
         return position;
     }
@@ -188,19 +221,11 @@ public class Employee {
         this.position = position;
     }
 
-   /* public List<Task> getTasksOwned() {
-        return tasks;
+    public Role getRole() {
+        return role;
     }
 
-    public void setTasksOwned(List<Task> tasksOwned) {
-        this.tasks = tasksOwned;
-    }*/
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

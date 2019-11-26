@@ -26,12 +26,6 @@ public class BusinessUnitMapperShould {
 
     }
 
-      //  @Test
-        //public void mapBusinessUnitResponseFromBusinessUnit () {
-          //  BusinessUnitResponse output = mapper.mapBusinessUnitResponseFromBusinessUnit(businessUnitInput);
-            //Assert.assertThat(expectedOutput, Matchers.samePropertyValuesAs(output));
-        //}
-
         @Test
         public void keepSameId() { Assert.assertEquals(5, expectedOutput.getId());
         }

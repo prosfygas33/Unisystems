@@ -17,13 +17,16 @@ public class EmployeeController {
     private EmployeeService service;
     ///// GET /////
     @GetMapping("/employees")
-    public GetAllEmployees getAllEmployees(){
-        return new GetAllEmployees(service.getAllEmployees());
+    public ResponseEntity getAllEmployees(){
+        return new ResponseEntity<>(
+                new GetAllEmployees(service.getAllEmployees()),
+                null,
+                 HttpStatus.OK);
     }
 
     @GetMapping("/employees/{id}")
-    public ResponseEntity getAllEmployeesById(@PathVariable Long id){
-        GenericResponse<List<EmployeeResponse>> response=service.getAllEmployeesById(id);
+    public ResponseEntity getAllEmployeesByUnitId(@PathVariable Long id){
+        GenericResponse<List<EmployeeResponse>> response = service.getAllEmployeesByUnitId(id);
 
         if(response.getError() != null){
             return new ResponseEntity<>(response.getError(),

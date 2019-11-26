@@ -10,31 +10,29 @@ import java.util.List;
 
 public class TaskResponse {
 
-    private long id;
+    private Long id;
     private String title;
     private String desc;
-    private Difficulty   difficultyEstimation;
-    private  TaskStatus   status;
-    private List<String> UpdateList;
+    private String difficultyEstimation;
+    private String status;
+    private List<String> updateList;
     private List<Employee> assignedEmployees;
-    //private Employee owner;
 
-
-    public TaskResponse(long id, String title, String desc, Difficulty difficultyEstimation, TaskStatus status, List<String> updateList, List<Employee> assignedEmployees) {
+    public TaskResponse(Long id, String title, String desc, String difficultyEstimation, String status, List<String> updateList, List<Employee> assignedEmployees) {
         this.id = id;
         this.title = title;
         this.desc = desc;
         this.difficultyEstimation = difficultyEstimation;
         this.status = status;
-        UpdateList = updateList;
+        this.updateList = updateList;
         this.assignedEmployees = assignedEmployees;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -54,28 +52,28 @@ public class TaskResponse {
         this.desc = desc;
     }
 
-    public Difficulty getDifficultyEstimation() {
+    public String getDifficultyEstimation() {
         return difficultyEstimation;
     }
 
-    public void setDifficultyEstimation(Difficulty difficultyEstimation) {
+    public void setDifficultyEstimation(String difficultyEstimation) {
         this.difficultyEstimation = difficultyEstimation;
     }
 
-    public TaskStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(TaskStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
     public List<String> getUpdateList() {
-        return UpdateList;
+        return updateList;
     }
 
     public void setUpdateList(List<String> updateList) {
-        UpdateList = updateList;
+        this.updateList = updateList;
     }
 
     public List<Employee> getAssignedEmployees() {

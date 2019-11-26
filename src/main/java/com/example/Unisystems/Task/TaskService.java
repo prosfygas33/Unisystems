@@ -6,6 +6,7 @@ import com.example.Unisystems.Error;
 import com.example.Unisystems.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.net.www.content.text.Generic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +20,26 @@ public class TaskService {
     @Autowired
     private TaskMapper mapper;
 
-    public GenericResponse<List<TaskResponse>>getAllTasksById(Long id){
-        Iterable<Task> retrieveTasks=taskRepository.findAll();
-        List<TaskResponse> tasks=new ArrayList<>();
-        for (Task task: retrieveTasks){
-            if(id==task.getId())
+    public GenericResponse<TaskResponse>getTaskById(Long id){
+        Iterable<Task> retrievedTasks = taskRepository.findAll();
+        TaskResponse taskResponse = null;
 
-               tasks.add(mapper.mapTasResponseFromTask(task)) ;
+        for (Task task: retrievedTasks){
+            if(id == task.getId())
+                taskResponse = mapper.mapTaskResponseFromTask(task);
         }
-        if(tasks.isEmpty())  return new GenericResponse<>(new Error(0,"Not Found", "No Task record exist for given id " + id));
-        return new GenericResponse<>(tasks);
+        if(taskResponse == null) return new GenericResponse<>(new Error(0,"Not Found", "No Task record exist for given id " + id));
+        return new GenericResponse<>(taskResponse);
+    }
 
+    public GenericResponse<String> createTask(TaskRequest taskRequest){
+        Task newTask = mapper.mapTaskFromTaskRequest(taskRequest);
+        try{
+            taskRepository.save(newTask);
+            return new GenericResponse<>("Post Successful");
+        }catch (Exception e){
+            return new GenericResponse<>("Post UnSuccessful");
+        }
 
     }
 

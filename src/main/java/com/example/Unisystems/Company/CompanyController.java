@@ -1,6 +1,8 @@
 package com.example.Unisystems.Company;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,8 +13,12 @@ public class CompanyController {
     CompanyService companyService;
 
     @GetMapping("/companies")
-    public GetAllCompanies getAllCompanies(){
-        return new GetAllCompanies(companyService.getCompanies());
+    public ResponseEntity getAllCompanies(){
+        return new ResponseEntity(
+                new GetAllCompanies(companyService.getCompanies()),
+                null,
+                HttpStatus.OK
+        );
     }
 
 }
