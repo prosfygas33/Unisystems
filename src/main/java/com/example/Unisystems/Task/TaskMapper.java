@@ -2,6 +2,9 @@ package com.example.Unisystems.Task;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class TaskMapper {
 
@@ -56,11 +59,16 @@ public class TaskMapper {
         }
     }
 
+    public List<TaskResponse> mapAllTasks(List<Task> tasks){
+        List<TaskResponse> tasksResponse = new ArrayList<>();
 
-    private String mapTaskFromDifficulty(Task task){
-
-        return String.valueOf((task));
-
+        for ( Task task : tasks ){
+            tasksResponse.add(mapTaskResponseFromTask(task));
+        }
+        return tasksResponse;
     }
-
 }
+
+
+
+

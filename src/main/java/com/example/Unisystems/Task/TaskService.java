@@ -1,17 +1,17 @@
 package com.example.Unisystems.Task;
 
 
+import com.example.Unisystems.*;
 import com.example.Unisystems.Employee.Employee;
 import com.example.Unisystems.Employee.EmployeeRepository;
-import com.example.Unisystems.Employee.EmployeeResponse;
 import com.example.Unisystems.Error;
-import com.example.Unisystems.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.net.www.content.text.Generic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -26,6 +26,9 @@ public class TaskService {
 
     @Autowired
     private TaskMapper mapper;
+
+    @Autowired
+    private SearchTaskStrategyFactory factory;
 
     public GenericResponse<TaskResponse> getTaskById(Long id) {
         Iterable<Task> retrievedTasks = taskRepository.findAll();
@@ -75,6 +78,22 @@ public class TaskService {
         taskRepository.save(task);
         return getTaskById(task.getId());
     }
+
+    public GenericResponse<List<TaskResponse>> getTaskByCriteria(String criteria) {
+        Iterable<Task> retrieveTasks = taskRepository.findAll();
+        List<TaskResponse> tasks;// = new ArrayList<>();
+        SearchTaskStrategy strategy = factory.makeStrategyForCriteria(criteria);
+        if(strategy == null)  return new GenericResponse<>(new Error(0,"Wrong Input", "This " +  criteria + " do not exist"));
+
+        tasks = mapper.mapAllTasks(strategy.execute(retrieveTasks));
+
+        if(tasks.isEmpty())  return new GenericResponse<>(new Error(0,"Not Found", "No Tasks record exist for given id " + criteria));
+
+        return new GenericResponse<>(tasks);
+    }
+
+
+
 
 
 }

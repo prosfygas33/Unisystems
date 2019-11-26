@@ -72,27 +72,6 @@ public class TaskController {
     }
 
 
-   /* @PutMapping("/task/{id}")
-    public Task replaceTask(@RequestBody Task updatedTask, @PathVariable Long id) {
-
-        return taskRepository.findById(id)
-                .map(task -> {
-                    task.setTitle(updatedTask.getTitle());
-                    task.setDesc(updatedTask.getDesc());
-                    task.setEstimationA(updatedTask.getEstimationA());
-                    task.setEstimationB(updatedTask.getEstimationA());
-                    task.setEstimationC(updatedTask.getEstimationC());
-                    task.setStatus(updatedTask.getStatus());
-                    task.setAssignedEmployees(updatedTask.getAssignedEmployees());
-                    task.setUpdateList(updatedTask.getUpdateList());
-                    return taskRepository.save(task);
-                })
-                .orElseGet(() -> {
-                    updatedTask.setId(id);
-                    return taskRepository.save(updatedTask);
-                });
-    }*/
-
 
     @DeleteMapping("/task/{id}")
     public void deleteEmployee(@PathVariable Long id) {
@@ -100,21 +79,20 @@ public class TaskController {
     }
 
 
-    /*@GetMapping("/taskStatus/{difficulty}")
-    public ResponseEntity getStatusDifficulty(@PathVariable Difficulty difficulty) {
-        GenericResponse<String> response = taskService.getStatusDifficulty(difficulty);
+    @GetMapping("/getTaskByCriteria/{criteria}")
+    public ResponseEntity getTaskByCriteria(@PathVariable String criteria) {
+        GenericResponse<List<TaskResponse>> response= taskService.getTaskByCriteria(criteria);
 
         if(response.getError() != null){
-            return new ResponseEntity<>(
-                    response.getError(),
+            return new ResponseEntity<>(response.getError(),
                     null,
                     HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(
-                response.getData(),
+        return new ResponseEntity<>(new GetAllTasks(response.getData()),
                 null,
                 HttpStatus.OK);
-    }*/
+
+    }
 }
 
 

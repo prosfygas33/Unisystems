@@ -1,8 +1,8 @@
 package com.example.Unisystems;
 
-import com.example.Unisystems.Employee.Employee;
+        import com.example.Unisystems.Employee.Employee;
 
-import java.util.List;
+        import java.util.List;
 
 public interface SearchEmployeeStrategy {
 
