@@ -1,6 +1,7 @@
 package com.example.Unisystems;
 
 import com.example.Unisystems.Company.*;
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +12,6 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
@@ -64,8 +64,9 @@ public class CompanyServiceShould {
         Assert.assertEquals(2, output.size());
 
         List<CompanyResponse> expected = new ArrayList<>();
-        expected.add(companyResponseFromMapper);
-        expected.add(companyResponseFromMapper);
-        Assert.assertThat(output, is(expected));
+        expected.add(new CompanyResponse(1, "company1"));
+        expected.add(new CompanyResponse(1, "company1"));
+        Assert.assertThat(output.get(0), Matchers.samePropertyValuesAs(expected.get(0)));
+        Assert.assertThat(output.get(1), Matchers.samePropertyValuesAs(expected.get(1)));
     }
 }
