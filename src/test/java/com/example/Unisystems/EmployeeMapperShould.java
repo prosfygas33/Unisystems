@@ -18,6 +18,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class  EmployeeMapperShould {
 
@@ -31,7 +32,9 @@ public class  EmployeeMapperShould {
     private BusinessUnit businessUnit;
     private Company company;
     private Role role;
-    private Privilege
+    private Privilege readPrivilege;
+    private Privilege writePrivilege;
+    private List<Privilege> privilege;
 
     @Before
     public void setUp(){
@@ -44,7 +47,11 @@ public class  EmployeeMapperShould {
         department = new Department("DepartmentName",businessUnit);
         department.setId((long) 1);
         unit = new Unit("UnitName",department);
-        role = new Role(RoleAssignment.ADMIN,role.setPrivileges();
+        readPrivilege = new Privilege("readPrivilege");
+        writePrivilege = new Privilege("writePrivilege");
+        privilege.add(readPrivilege);
+        privilege.add(writePrivilege);
+        role = new Role(RoleAssignment.ADMIN,privilege);
         role.setId((long) 1);
         unit.setId(1);
         employeeInput = new Employee(1,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, company, businessUnit, department, unit,null, "Junior Developer",role);

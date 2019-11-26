@@ -1,6 +1,7 @@
 package com.example.Unisystems.RoleAuthentication;
 
 import com.example.Unisystems.Employee.Employee;
+import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -11,21 +12,30 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "role_id")
     private Long id;
 
     private RoleAssignment name;
 
-    //@ManyToMany(mappedBy = "roles")
-    //private List<Employee> employees;
+    @OneToMany//(mappedBy = "roles")
+    private List<Employee> employees;
 
     @ManyToMany
-    @JoinTable(
-            name = "roles_privileges",
+    /*@JoinTable(
+           name = "roles_privileges",
             joinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
-                    name = "privilege_id", referencedColumnName = "id"))
+                    name = "privilege_id", referencedColumnName = "id"))*/
+
+            @JoinTable(name = "role_privileges",
+                    joinColumns = {@JoinColumn(name="role_id")},
+                    inverseJoinColumns ={ @JoinColumn(name = "privilege_id") })
+
     private List<Privilege> privileges;
+
+    public Role() {
+    }
 
     public Role(RoleAssignment name, List<Privilege> privileges) {
         this.name = name;

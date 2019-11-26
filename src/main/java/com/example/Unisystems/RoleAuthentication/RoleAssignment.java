@@ -3,5 +3,5 @@ package com.example.Unisystems.RoleAuthentication;
 public enum RoleAssignment {
 
     ADMIN,
-    USER
+    EMPLOYEE
 }

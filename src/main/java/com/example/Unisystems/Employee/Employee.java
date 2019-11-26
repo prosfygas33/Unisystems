@@ -60,13 +60,19 @@ public class Employee {
     private String position;
 
     @ManyToOne
-    @JoinTable(
-            name = "employees_roles",
+   @JoinTable(name = "employees_roles",
+    joinColumns = {@JoinColumn(name="employee_id")},
+            inverseJoinColumns ={ @JoinColumn(name = "role_id") })
+
+          /*  name = "employees_roles",
             joinColumns = @JoinColumn(
-                    name = "employee_id", referencedColumnName = "id"),
+                                name = "employee_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))
+                    name = "role_id", referencedColumnName = "id"))*/
     private Role role;
+
+    public Employee() {
+    }
 
     public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasks, String position, Role role) {
         this.recordNumber = recordNumber;
