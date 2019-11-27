@@ -14,7 +14,7 @@ public class EmployeeMapper {
             employee.getRecordNumber(),
             employee.getFirstname() + " " + employee.getLastname(),
                 employee.getTelephoneNumber(),
-                employee.getStartDate() + " - " + employee.getEndDate(),
+                getWorkingPeriod(employee),
                 employee.isStatus() ? Status.ACTIVE : Status.INACTIVE,
                 employee.isContactType() ? "ACTIVE" : "EXTERNAL",
                 employee.getPosition(),
@@ -30,5 +30,16 @@ public class EmployeeMapper {
             employeesResponse.add(mapEmployeeResponseFromEmployee(employee));
         }
         return employeesResponse;
+    }
+
+    private String getWorkingPeriod(Employee employee){
+        String end;
+
+        if(employee.getEndDate() == null)
+            end = "Present";
+        else {
+            end = String.valueOf(employee.getEndDate());
+        }
+        return String.valueOf(employee.getStartDate()) + " - " + end;
     }
 }
