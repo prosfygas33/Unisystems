@@ -19,6 +19,11 @@ public class DepartmentService {
     @Autowired
     DepartmentMapper departmentMapper;
 
+    public DepartmentService(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper) {
+        this.departmentRepository = departmentRepository;
+        this.departmentMapper = departmentMapper;
+    }
+
     public List<DepartmentResponse> getDepartments(){
         Iterable<Department> retrievedDepartments = departmentRepository.findAll();
         List<DepartmentResponse> departments = new ArrayList<>();
