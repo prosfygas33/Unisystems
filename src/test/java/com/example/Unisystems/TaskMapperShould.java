@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,16 +20,16 @@ public class TaskMapperShould {
     private TaskResponse expectedOutput;
 
     @Before
-    public void setUp(){
+    public void setUp() throws ParseException {
         mapper = new TaskMapper();
-        employee = new Employee(1,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, null, null, null, null,null, "Junior Developer");
+        employee = new Employee("Panagiotis", "Milios", "Kimolou 14", "2108817081", new SimpleDateFormat("dd/mm/yyyy").parse("14/10/2010"), new Date(), true, true, null,null,"Junior Developer");
         employee.setId(10);
         List<Employee> employees = new ArrayList<>();
         employees.add(employee);
         List<String> updateList = new ArrayList<>();
         updateList.add("Initial Commit");
         taskInput = new Task("title","desc",5,4,3, TaskStatus.STARTED,employees,updateList);
-        taskInput.setId(5);
+        taskInput.setId((long) 5);
         expectedOutput = mapper.mapTaskResponseFromTask(taskInput);
     }
 

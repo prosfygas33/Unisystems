@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 
@@ -36,7 +37,7 @@ public class TaskController {
     }
 
     @PostMapping("/task")
-    public ResponseEntity createTask(@RequestBody TaskRequest taskRequest) {
+    public ResponseEntity createTask(@RequestBody TaskRequest taskRequest) throws ParseException {
         GenericResponse<String> response = taskService.createTask(taskRequest);
 
         if(response.getError() != null){

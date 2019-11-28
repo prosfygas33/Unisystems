@@ -1,6 +1,7 @@
 package com.example.Unisystems.Task;
 
 import com.example.Unisystems.Employee.Employee;
+import com.example.Unisystems.Employee.EmployeeRequest;
 
 import java.util.List;
 
@@ -12,14 +13,24 @@ public class TaskRequest {
     private int estimationB;
     private int estimationC;
     private String status;
+    private List<EmployeeRequest> assignedEmployees;
 
-    public TaskRequest(String title, String desc, int estimationA, int estimationB, int estimationC, String status) {
+    public TaskRequest(String title, String desc, int estimationA, int estimationB, int estimationC, String status, List<EmployeeRequest> employees ) {
         this.title = title;
         this.desc = desc;
         this.estimationA = estimationA;
         this.estimationB = estimationB;
         this.estimationC = estimationC;
         this.status = status;
+        this.assignedEmployees = employees;
+    }
+
+    public List<EmployeeRequest> getEmployees() {
+        return assignedEmployees;
+    }
+
+    public void setEmployees(List<EmployeeRequest> employees) {
+        this.assignedEmployees = employees;
     }
 
     public String getTitle() {

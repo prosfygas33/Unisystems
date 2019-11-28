@@ -8,6 +8,7 @@ import com.example.Unisystems.Unit.Unit;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,9 +22,10 @@ public class Employee {
     @Column(name = "employee_id")
     private long id;
 
-    private  int recordNumber;
-    private String firstname;
-    private String lastname;
+    //DEPRECATED
+    //private  int recordNumber;
+    private String firstName;
+    private String lastName;
     private String address;
     private String telephoneNumber;
     private Date startDate;
@@ -33,17 +35,9 @@ public class Employee {
     private boolean contactType;
 
     @ManyToOne
-    private Company company;
-
-    @ManyToOne
-    private BusinessUnit businessUnit;
-
-    @ManyToOne
-    private Department department;
-
-    @ManyToOne
     private Unit unit;
 
+    //Owner of the relation
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.MERGE
@@ -53,21 +47,18 @@ public class Employee {
             inverseJoinColumns = { @JoinColumn(name = "task_id") })
     private List<Task> tasks = new ArrayList();
 
+
     private String position;
 
-    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasks, String position) {
-        this.recordNumber = recordNumber;
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public Employee(String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Unit unit, List<Task> tasks, String position) {
+        this.firstName = firstname;
+        this.lastName = lastname;
         this.address = address;
         this.telephoneNumber = telephoneNumber;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
         this.contactType = contactType;
-        this.company = company;
-        this.businessUnit = businessUnit;
-        this.department = department;
         this.unit = unit;
         this.tasks = tasks;
         this.position = position;
@@ -85,28 +76,20 @@ public class Employee {
         this.id = id;
     }
 
-    public int getRecordNumber() {
-        return recordNumber;
-    }
-
-    public void setRecordNumber(int recordNumber) {
-        this.recordNumber = recordNumber;
-    }
-
     public String getFirstname() {
-        return firstname;
+        return firstName;
     }
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname;
+        this.firstName = firstname;
     }
 
     public String getLastname() {
-        return lastname;
+        return lastName;
     }
 
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.lastName = lastname;
     }
 
     public String getAddress() {
@@ -155,30 +138,6 @@ public class Employee {
 
     public void setContactType(boolean contactType) {
         this.contactType = contactType;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public BusinessUnit getBusinessUnit() {
-        return businessUnit;
-    }
-
-    public void setBusinessUnit(BusinessUnit businessUnit) {
-        this.businessUnit = businessUnit;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
     }
 
     public Unit getUnit() {

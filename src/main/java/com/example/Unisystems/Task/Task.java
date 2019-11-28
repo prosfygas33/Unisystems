@@ -23,6 +23,7 @@ public class Task {
     private int estimationC;
     private TaskStatus status;
 
+
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.MERGE
@@ -30,6 +31,7 @@ public class Task {
             mappedBy = "tasks")
     @JsonIgnore
     private List<Employee> assignedEmployees = new ArrayList<>();
+
 
     @ElementCollection
     private List<String> updateList = new ArrayList<>();

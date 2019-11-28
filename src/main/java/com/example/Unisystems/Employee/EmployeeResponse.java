@@ -7,7 +7,6 @@ import java.util.List;
 public class EmployeeResponse {
 
     private long id;
-    private long recordNumber;
     private String fullName;
     private String telephone;
     private String workingPeriod;
@@ -17,9 +16,8 @@ public class EmployeeResponse {
     private List<Task> tasks;
     private String unitName;
 
-    public EmployeeResponse(long id, long recordNumber, String fullName, String telephone, String workingPeriod, Status status, String contactType, String position,List<Task> tasks, String unitName) {
+    public EmployeeResponse(long id, String fullName, String telephone, String workingPeriod, Status status, String contactType, String position,List<Task> tasks, String unitName) {
         this.id = id;
-        this.recordNumber = recordNumber;
         this.fullName = fullName;
         this.telephone = telephone;
         this.workingPeriod = workingPeriod;
@@ -44,14 +42,6 @@ public class EmployeeResponse {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getRecordNumber() {
-        return recordNumber;
-    }
-
-    public void setRecordNumber(long recordNumber) {
-        this.recordNumber = recordNumber;
     }
 
     public String getFullName() {

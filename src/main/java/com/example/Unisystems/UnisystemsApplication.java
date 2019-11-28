@@ -18,6 +18,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @SpringBootApplication
@@ -75,12 +76,14 @@ public class UnisystemsApplication implements CommandLineRunner {
 		Unit u3 = new Unit("Database Management Squad", d2);
 		Unit u4 = new Unit("Debugging Squad", d2);
 		Unit u5 = new Unit("Shareholders", d3);
+		Unit u6 = new Unit("Generic",d2);
 
 		unitRepository.save(u1);
 		unitRepository.save(u2);
 		unitRepository.save(u3);
 		unitRepository.save(u4);
 		unitRepository.save(u5);
+		unitRepository.save(u6);
 
 		List<String> updateList = new ArrayList<>();
 
@@ -89,14 +92,14 @@ public class UnisystemsApplication implements CommandLineRunner {
 		taskList.add(task1);
 		taskRepository.save(task1);
 
-		Employee emp1 = new Employee(111,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, c1, b1, d2, u4,taskList,"Junior Developer");
+		Employee emp1 = new Employee("Panagiotis", "Milios", "Kimolou 14", "2108817081", new SimpleDateFormat("dd/mm/yyyy").parse("14/10/2010"), new Date(), true, true, u4,taskList,"Junior Developer");
 		List<Employee> employees = new ArrayList<>();
 		employees.add(emp1);
 		task1.setAssignedEmployees(employees);
-		Employee emp2 = new Employee(122,"Petros", "Euthimiou", "Spetson 17", "2108834081", new Date(111, 5, 15), new Date(), true, true, c1, b1, d3, u5, null,"Senior Developer");
-		Employee emp3 = new Employee(123,"Mitsos", "Kitsou", "Spartis 25", "2108855284", new Date(110, 11, 5), new Date(), true, true, c1, b1, d1, u2,null ,"Hr officer");
-		Employee emp4 = new Employee(124,"Kostas", "Fleggas", "Tsoxa 13", "2107440081", new Date(112, 7, 15), new Date(), true, true, c1, b1, d3, u5, null," Manager");
-		Employee emp5 = new Employee(125,"George", "Dom", "Ymitou 40", "2105520081", new Date(112, 2, 15), new Date(), true, true, c1, b1, d2, u4, null," Mid-Senior Developer");
+		Employee emp2 = new Employee("Petros", "Euthimiou", "Spetson 17", "2108834081", new SimpleDateFormat("dd/mm/yyyy").parse("25/06/2012"), new Date(), true, true, u5, null,"Senior Developer");
+		Employee emp3 = new Employee("Mitsos", "Kitsou", "Spartis 25", "2108855284", new SimpleDateFormat("dd/mm/yyyy").parse("21/11/2010"), new Date(), true, true, u2,null ,"Hr officer");
+		Employee emp4 = new Employee("Kostas", "Fleggas", "Tsoxa 13", "2107440081", new SimpleDateFormat("dd/mm/yyyy").parse("08/05/2014"), new Date(), true, true, u5, null," Manager");
+		Employee emp5 = new Employee("George", "Dom", "Ymitou 40", "2105520081", new SimpleDateFormat("dd/mm/yyyy").parse("31/12/1998"), new SimpleDateFormat("dd/mm/yyyy").parse("31/11/2010"), false, true, u4, null," Mid-Senior Developer");
 
 		employeeRepository.save(emp1);
 		employeeRepository.save(emp2);

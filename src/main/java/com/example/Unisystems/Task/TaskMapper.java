@@ -1,9 +1,18 @@
 package com.example.Unisystems.Task;
 
+import com.example.Unisystems.Employee.Employee;
+import com.example.Unisystems.Employee.EmployeeMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.text.ParseException;
+import java.util.List;
 
 @Component
 public class TaskMapper {
+
+    @Autowired
+    TaskRepository taskRepository;
 
     public TaskResponse mapTaskResponseFromTask(Task task){
         return new TaskResponse(
@@ -23,11 +32,9 @@ public class TaskMapper {
             return Difficulty.EASY ;
         }
         else if (sumEstimation>=2 && sumEstimation <= 4){
-
             return Difficulty.MEDIUM;
         }
         else {
-
             return Difficulty.HARD;
         }
     }
