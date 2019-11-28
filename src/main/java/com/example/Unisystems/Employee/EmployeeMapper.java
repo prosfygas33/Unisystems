@@ -64,7 +64,11 @@ public class EmployeeMapper {
         //Employee exists, assign him to the task
         for ( Employee employee : retrievedEmployees ){
             if ( employeeRequest.getRecordNumber() == employee.getRecordNumber()){
-                employee.setTasks(taskList);
+                for ( Task task : taskList) {
+                    System.out.println("EDW");
+                    employee.addTask(task);
+                }
+                employeeRepository.save(employee);
                 return null;
             }
         }

@@ -44,7 +44,7 @@ public class Employee {
     @JoinTable(name = "employees_tasks",
             joinColumns = { @JoinColumn(name = "employee_id") },
             inverseJoinColumns = { @JoinColumn(name = "task_id") })
-    private List<Task> tasks = new ArrayList();
+    private List<Task> tasks;
 
 
     private String position;
@@ -178,5 +178,9 @@ public class Employee {
 
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public void addTask(Task task){
+        this.tasks.add(task);
     }
 }
