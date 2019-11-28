@@ -4,6 +4,7 @@ import com.example.Unisystems.Employee.Employee;
 import com.example.Unisystems.Employee.EmployeeMapper;
 import com.example.Unisystems.Employee.EmployeeRepository;
 import com.example.Unisystems.Employee.EmployeeRequest;
+import com.example.Unisystems.GenericResponse;
 import com.example.Unisystems.Task.Task;
 import com.example.Unisystems.Task.TaskMapper;
 import com.example.Unisystems.Task.TaskRepository;
@@ -30,16 +31,22 @@ public class Employee_Task_Mapper {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public Employee_Task_Request mapTaskEmployeeRequest(TaskRequest taskRequest) throws ParseException {
+    public GenericResponse<String> mapTaskEmployeeRequest(TaskRequest taskRequest) throws ParseException {
+        //Create task
         Task task = taskMapper.mapTaskFromTaskRequest(taskRequest);
         taskRepository.save(task);
         List<Task> taskList = new ArrayList<>();
         taskList.add(task);
+        //Create employee(s)
         List<Employee> employees = employeeMapper.mapAllEmployeesRequest(taskRequest,taskList);
-        for ( Employee employee : employees ){
-            employeeRepository.save(employee);
+        if ( employees.size() != 0 ){
+            for ( Employee employee : employees ){
+                employeeRepository.save(employee);
+            }
+            return new GenericResponse<>("Task added successfully!\nEmployee(s) added successfully");
         }
-        return null;
+
+        return new GenericResponse("Task added successfully\nEmployee already exists!");
     }
 
 }

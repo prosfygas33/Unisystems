@@ -45,10 +45,10 @@ public class TaskService {
     }
 
     public GenericResponse<String> createTask(TaskRequest taskRequest) throws ParseException {
-        Employee_Task_Request employee_task_request = employee_task_mapper.mapTaskEmployeeRequest(taskRequest);
+        GenericResponse<String> genericResponse = employee_task_mapper.mapTaskEmployeeRequest(taskRequest);
         //employee_task_request.getTask().setAssignedEmployees(employee_task_request.getEmployees());
 
-        return new GenericResponse<>("Post Successful");
+        return genericResponse;
     }
 
 

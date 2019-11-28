@@ -20,11 +20,12 @@ public class EmployeeMapper {
     @Autowired
     TaskMapper taskMapper;
 
+
     public EmployeeResponse mapEmployeeResponseFromEmployee(Employee employee){
         if ( employee.getUnit() != null ) {
             return new EmployeeResponse(
                     employee.getId(),
-                    employee.getFirstname() + " " + employee.getLastname(),
+                    employee.getFirstName() + " " + employee.getLastName(),
                     employee.getTelephoneNumber(),
                     employee.getStartDate() + " - " + employee.getEndDate(),
                     employee.isStatus() ? Status.ACTIVE : Status.INACTIVE,
@@ -36,7 +37,7 @@ public class EmployeeMapper {
         }else{
             return new EmployeeResponse(
                     employee.getId(),
-                    employee.getFirstname() + " " + employee.getLastname(),
+                    employee.getFirstName() + " " + employee.getLastName(),
                     employee.getTelephoneNumber(),
                     employee.getStartDate() + " - " + employee.getEndDate(),
                     employee.isStatus() ? Status.ACTIVE : Status.INACTIVE,
@@ -58,6 +59,16 @@ public class EmployeeMapper {
     }
 
     public Employee mapEmployeeFromEmployeeRequest(EmployeeRequest employeeRequest,List<Task> taskList) throws ParseException {
+        Iterable<Employee> retrievedEmployees = employeeRepository.findAll();
+
+        //Employee exists, assign him to the task
+        for ( Employee employee : retrievedEmployees ){
+            if ( employeeRequest.getRecordNumber() == employee.getRecordNumber()){
+                employee.setTasks(taskList);
+                return null;
+            }
+        }
+
         boolean status = false;
         boolean contactStatus = false;
         if ( employeeRequest.getStatus().equalsIgnoreCase("ACTIVE")) {
@@ -68,6 +79,7 @@ public class EmployeeMapper {
         }
 
         return new Employee(
+                employeeRequest.getRecordNumber(),
                 employeeRequest.getFirstName(),
                 employeeRequest.getLastName(),
                 employeeRequest.getAddress(),
@@ -87,8 +99,10 @@ public class EmployeeMapper {
 
         for ( EmployeeRequest employeeRequest : taskRequest.getEmployees() ){
             Employee e = mapEmployeeFromEmployeeRequest(employeeRequest,taskList);
-            employeeRepository.save(e);
-            employees.add(e);
+            if ( e != null ){
+                employeeRepository.save(e);
+                employees.add(e);
+            }
         }
         return employees;
     }

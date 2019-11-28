@@ -22,8 +22,7 @@ public class Employee {
     @Column(name = "employee_id")
     private long id;
 
-    //DEPRECATED
-    //private  int recordNumber;
+    private int recordNumber;
     private String firstName;
     private String lastName;
     private String address;
@@ -50,9 +49,10 @@ public class Employee {
 
     private String position;
 
-    public Employee(String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Unit unit, List<Task> tasks, String position) {
-        this.firstName = firstname;
-        this.lastName = lastname;
+    public Employee(int recordNumber, String firstName, String lastName, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Unit unit, List<Task> tasks, String position) {
+        this.recordNumber = recordNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.address = address;
         this.telephoneNumber = telephoneNumber;
         this.startDate = startDate;
@@ -76,19 +76,27 @@ public class Employee {
         this.id = id;
     }
 
-    public String getFirstname() {
+    public int getRecordNumber() {
+        return recordNumber;
+    }
+
+    public void setRecordNumber(int recordNumber) {
+        this.recordNumber = recordNumber;
+    }
+
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstname(String firstname) {
+    public void setFirstName(String firstname) {
         this.firstName = firstname;
     }
 
-    public String getLastname() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastname(String lastname) {
+    public void setLastName(String lastname) {
         this.lastName = lastname;
     }
 

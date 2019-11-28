@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 
 public class EmployeeRequest {
 
+    private int recordNumber;
     private String firstName;
     private String lastName;
     private String address;
@@ -16,7 +17,8 @@ public class EmployeeRequest {
     private String contactType;
     private String position;
 
-    public EmployeeRequest(String firstName, String lastName, String address, String telephoneNumber, String startDate, String endDate, String status, String contactType, String position) {
+    public EmployeeRequest(int recordNumber, String firstName, String lastName, String address, String telephoneNumber, String startDate, String endDate, String status, String contactType, String position) {
+        this.recordNumber = recordNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -29,6 +31,14 @@ public class EmployeeRequest {
     }
 
     public EmployeeRequest(){ }
+
+    public int getRecordNumber() {
+        return recordNumber;
+    }
+
+    public void setRecordNumber(int recordNumber) {
+        this.recordNumber = recordNumber;
+    }
 
     public String getFirstName() {
         return firstName;
