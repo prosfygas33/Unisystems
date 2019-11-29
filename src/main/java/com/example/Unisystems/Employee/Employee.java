@@ -67,10 +67,10 @@ public class Employee {
     @Column(name = "EMAIL")
     private String email;
 
-    @ManyToMany
-    @JoinTable(name = "User_ROLES",
-            joinColumns =  @JoinColumn(name = "employee_id"),inverseJoinColumns= @JoinColumn(name = "role_id"))
-    private List<Role> roles= new ArrayList();
+    @ManyToOne
+  // @JoinTable(name = "User_ROLES",
+    //        joinColumns =  @JoinColumn(name = "employee_id"),inverseJoinColumns= @JoinColumn(name = "role_id"))
+    private Role role;
 
    /* @ManyToOne
    @JoinTable(name = "employees_roles",
@@ -87,7 +87,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasks, String position, String username, String password, String email, List roles) {
+    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasks, String position, String username, String password, String email, Role role) {
         this.recordNumber = recordNumber;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -106,7 +106,7 @@ public class Employee {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.roles = roles;
+        this.role = role;
     }
 
     public long getId() {
@@ -261,11 +261,11 @@ public class Employee {
         this.email = email;
     }
 
-    public List getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(List roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

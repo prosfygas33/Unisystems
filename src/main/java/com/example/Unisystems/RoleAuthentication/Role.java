@@ -27,12 +27,12 @@ import java.util.List;
     @Column(name = "MODIFIED_ON")
     private Long modifiedOn;*/
 
-    @ManyToMany(fetch = FetchType.LAZY,
+  /*  @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.MERGE
             },
             mappedBy = "roles")
-    private List<Employee> employees;
+    private List<Employee> employees;*/
 
    /*@ManyToMany
     //@JoinTable(
