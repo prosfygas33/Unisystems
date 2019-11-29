@@ -22,7 +22,7 @@ public class TaskMapperShould {
     @Before
     public void setUp() throws ParseException {
         mapper = new TaskMapper();
-        employee = new Employee("Panagiotis", "Milios", "Kimolou 14", "2108817081", new SimpleDateFormat("dd/mm/yyyy").parse("14/10/2010"), new Date(), true, true, null,null,"Junior Developer");
+        employee = new Employee(1,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new SimpleDateFormat("dd/mm/yyyy").parse("14/10/2010"), new Date(), true, true, null,null,"Junior Developer");
         employee.setId(10);
         List<Employee> employees = new ArrayList<>();
         employees.add(employee);

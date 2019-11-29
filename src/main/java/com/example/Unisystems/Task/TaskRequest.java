@@ -15,12 +15,9 @@ public class TaskRequest {
     private int estimationC;
     private String status;
     private List<EmployeeRequest> assignedEmployees;
-
-    public TaskRequest(String title, String desc, int estimationA, int estimationB, int estimationC, String status, List<EmployeeRequest> employees ) {
     private List<Long> employeesIds;
 
-    public TaskRequest(Long id, String title, String desc, int estimationA, int estimationB, int estimationC, String status, List<Long> employeesIds) {
-        this.id = id;
+    public TaskRequest(String title, String desc, int estimationA, int estimationB, int estimationC, String status, List<EmployeeRequest> employees ) {
         this.title = title;
         this.desc = desc;
         this.estimationA = estimationA;
@@ -30,16 +27,26 @@ public class TaskRequest {
         this.assignedEmployees = employees;
     }
 
+    public TaskRequest(Long id, String title, String desc, int estimationA, int estimationB, int estimationC, String status, List<Long> employeesIds) {
+        this.id = id;
+        this.title = title;
+        this.desc = desc;
+        this.estimationA = estimationA;
+        this.estimationB = estimationB;
+        this.estimationC = estimationC;
+        this.status = status;
+        this.employeesIds = employeesIds;
+    }
+
+    public TaskRequest() {
+    }
+
     public List<EmployeeRequest> getEmployees() {
         return assignedEmployees;
     }
 
     public void setEmployees(List<EmployeeRequest> employees) {
         this.assignedEmployees = employees;
-        this.employeesIds = employeesIds;
-    }
-
-    public TaskRequest() {
     }
 
     public Long getId() {

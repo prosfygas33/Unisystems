@@ -49,14 +49,8 @@ public class TaskService {
         return new GenericResponse<>(taskResponse);
     }
 
-    public GenericResponse<String> createTask(TaskRequest taskRequest) {
-        Task newTask = mapper.mapTaskFromTaskRequest(taskRequest);
-        try {
-            taskRepository.save(newTask);
-            return new GenericResponse<>("Post Successful");
-        } catch (Exception e) {
-            return new GenericResponse<>("Post UnSuccessful");
-        }
+    public GenericResponse<String> createTask(TaskRequest taskRequest) throws ParseException {
+        GenericResponse<String> genericResponse = employee_task_mapper.mapTaskEmployeeRequest(taskRequest);
 
         return genericResponse;
     }
@@ -72,7 +66,7 @@ public class TaskService {
         if(distinctUnitNames.size() > 1){
             throw new RuntimeException("The employees not at the same Unit");
         }
-        final Task taskNew =  mapper.mapTaskFromTaskRequest(taskRequest);
+        final Task taskNew =  taskMapper.mapTaskFromTaskRequest(taskRequest);
         task.setTitle(taskNew.getTitle());
         task.setDesc(taskNew.getDesc());
         task.setEstimationA(taskNew.getEstimationA());
@@ -94,7 +88,7 @@ public class TaskService {
         SearchTaskStrategy strategy = searchTaskStrategyFactory.makeStrategyForCriteria(difficulty,numberOfEmployees);
         if(strategy == null)  return new GenericResponse<>(new Error(0,"Wrong Input", "This difficulty: (" +  difficulty + ") does not exist or this number: (" + numberOfEmployees + ") is invalid!"));
 
-        tasks = mapper.mapAllTasks(strategy.execute(difficulty,numberOfEmployees,retrievedTasks));
+        tasks = taskMapper.mapAllTasks(strategy.execute(difficulty,numberOfEmployees,retrievedTasks));
 
         if(tasks.isEmpty())  return new GenericResponse<>(new Error(0,"Not Found", "No Task records exist for given difficulty: " + difficulty + " and given number of employees: " + numberOfEmployees));
 
