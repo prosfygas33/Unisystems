@@ -1,5 +1,8 @@
 package com.example.Unisystems.Employee;
 
+import com.example.Unisystems.Unit.Unit;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.text.SimpleDateFormat;
 
 public class EmployeeRequest {
@@ -18,7 +21,7 @@ public class EmployeeRequest {
     private String position;
     private String unitName;
 
-    public EmployeeRequest(int recordNumber, String firstName, String lastName, String address, String telephoneNumber, String startDate, String endDate, String status, String contactType, String position) {
+    public EmployeeRequest(int recordNumber, String firstName, String lastName, String address, String telephoneNumber, String startDate, String endDate, String status, String contactType, String position, String unitName) {
         this.recordNumber = recordNumber;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,6 +32,7 @@ public class EmployeeRequest {
         this.status = status;
         this.contactType = contactType;
         this.position = position;
+        this.unitName = unitName;
     }
 
     public EmployeeRequest(){ }
@@ -111,6 +115,14 @@ public class EmployeeRequest {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
     }
 }
 

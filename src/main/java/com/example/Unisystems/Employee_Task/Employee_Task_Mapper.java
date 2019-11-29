@@ -40,11 +40,10 @@ public class Employee_Task_Mapper {
 
         //Create employee(s)
         List<Employee> employees = employeeMapper.mapAllEmployeesRequest(taskRequest,taskList);
-        if ( employees.size() != 0 ){/*
-            for ( Employee employee : employees ){
-                employeeRepository.save(employee);
-            }
-         */
+        if ( employees == null ){
+            return new GenericResponse<>("Employees belong to the same Unit. Post Canceled!");
+        }
+        if ( employees.size() != 0 ){
             return new GenericResponse<>("Task added successfully!\nEmployee(s) added successfully");
         }
 
