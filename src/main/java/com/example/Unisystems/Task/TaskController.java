@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sun.net.www.content.text.Generic;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -72,16 +73,15 @@ public class TaskController {
     }
 
 
+    @GetMapping("/getTaskByCriteria")
+    public ResponseEntity getTaskByDifficulty(@RequestParam(value="difficulty",required = false) String difficulty,@RequestParam(value="numberOfEmployees",required = false) Long numberOfEmployees) {
+        GenericResponse<List<TaskResponse>> response;
+        if ( difficulty == null && numberOfEmployees == null){
+            response = new GenericResponse(new com.example.Unisystems.Error(404,"Not Found","No parameters were given!"));
+        }else{
+            response = taskService.getTaskByCriteria(difficulty,numberOfEmployees);
+        }
 
-    @DeleteMapping("/task/{id}")
-    public void deleteEmployee(@PathVariable Long id) {
-        taskRepository.deleteById(id);
-    }
-
-
-    @GetMapping("/getTaskByCriteria/{criteria}")
-    public ResponseEntity getTaskByCriteria(@PathVariable String criteria) {
-        GenericResponse<List<TaskResponse>> response= taskService.getTaskByCriteria(criteria);
 
         if(response.getError() != null){
             return new ResponseEntity<>(response.getError(),
@@ -91,8 +91,39 @@ public class TaskController {
         return new ResponseEntity<>(new GetAllTasks(response.getData()),
                 null,
                 HttpStatus.OK);
-
     }
+
+    /*
+    @GetMapping("/getTaskByCriteria")
+    public ResponseEntity getTaskByNumberOfEmployees(@RequestParam(value="numberOfEmployees") Long numberOfEmployees) {
+        GenericResponse<List<TaskResponse>> response= taskService.getTaskByCriteria(numberOfEmployees);
+
+        if(response.getError() != null){
+            return new ResponseEntity<>(response.getError(),
+                    null,
+                    HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(new GetAllTasks(response.getData()),
+                null,
+                HttpStatus.OK);
+    }
+
+     */
+
+    @GetMapping("/getTaskByCriteria/{difficulty}/{numberOfEmployees}")
+    public ResponseEntity getTaskByDifficultyAndNumberOfEmployees(@PathVariable String difficulty, @PathVariable Long numberOfEmployees) {
+        GenericResponse<List<TaskResponse>> response= taskService.getTaskByCriteria(difficulty, numberOfEmployees);
+
+        if(response.getError() != null){
+            return new ResponseEntity<>(response.getError(),
+                    null,
+                    HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(new GetAllTasks(response.getData()),
+                null,
+                HttpStatus.OK);
+    }
+
 }
 
 

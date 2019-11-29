@@ -5,13 +5,13 @@ import com.example.Unisystems.*;
 import com.example.Unisystems.Employee.Employee;
 import com.example.Unisystems.Employee.EmployeeRepository;
 import com.example.Unisystems.Error;
+import com.example.Unisystems.TaskStrategy.SearchTaskStrategy;
+import com.example.Unisystems.TaskStrategy.SearchTaskStrategyFactory;
+import org.graalvm.compiler.nodes.java.LoadExceptionObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.Spliterators;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -28,7 +28,7 @@ public class TaskService {
     private TaskMapper mapper;
 
     @Autowired
-    private SearchTaskStrategyFactory factory;
+    private SearchTaskStrategyFactory searchTaskStrategyFactory;
 
     public GenericResponse<TaskResponse> getTaskById(Long id) {
         Iterable<Task> retrievedTasks = taskRepository.findAll();
@@ -79,21 +79,49 @@ public class TaskService {
         return getTaskById(task.getId());
     }
 
-    public GenericResponse<List<TaskResponse>> getTaskByCriteria(String criteria) {
-        Iterable<Task> retrieveTasks = taskRepository.findAll();
-        List<TaskResponse> tasks;// = new ArrayList<>();
-        SearchTaskStrategy strategy = factory.makeStrategyForCriteria(criteria);
-        if(strategy == null)  return new GenericResponse<>(new Error(0,"Wrong Input", "This " +  criteria + " do not exist"));
+/*
+    public GenericResponse<List<TaskResponse>> getTaskByCriteria(String difficulty) {
+        Iterable<Task> retrievedTasks = taskRepository.findAll();
+        List<TaskResponse> tasks;
 
-        tasks = mapper.mapAllTasks(strategy.execute(retrieveTasks));
+        SearchTaskStrategy strategy = searchTaskStrategyFactory.makeStrategyForCriteria(difficulty);
+        if(strategy == null)  return new GenericResponse<>(new Error(0,"Wrong Input", "This " +  difficulty + " does not exist!"));
 
-        if(tasks.isEmpty())  return new GenericResponse<>(new Error(0,"Not Found", "No Tasks record exist for given id " + criteria));
+        tasks = mapper.mapAllTasks(strategy.execute(difficulty,retrievedTasks));
+
+        if(tasks.isEmpty())  return new GenericResponse<>(new Error(0,"Not Found", "No Task records exist for given difficulty: " + difficulty));
 
         return new GenericResponse<>(tasks);
     }
 
+    public GenericResponse<List<TaskResponse>> getTaskByCriteria(Long numberOfEmployees) {
+        Iterable<Task> retrievedTasks = taskRepository.findAll();
+        List<TaskResponse> tasks;
 
+        SearchTaskStrategy strategy = searchTaskStrategyFactory.makeStrategyForCriteria(numberOfEmployees);
+        if(strategy == null)  return new GenericResponse<>(new Error(0,"Wrong Input", "This number: (" +  numberOfEmployees + ") does not exist!"));
 
+        tasks = mapper.mapAllTasks(strategy.execute(numberOfEmployees,retrievedTasks));
 
+        if(tasks.isEmpty())  return new GenericResponse<>(new Error(0,"Not Found", "No Task records exist for given number of Employees: " + numberOfEmployees));
+
+        return new GenericResponse<>(tasks);
+    }
+
+ */
+
+    public GenericResponse<List<TaskResponse>> getTaskByCriteria(String difficulty, Long numberOfEmployees) {
+        Iterable<Task> retrievedTasks = taskRepository.findAll();
+        List<TaskResponse> tasks;
+
+        SearchTaskStrategy strategy = searchTaskStrategyFactory.makeStrategyForCriteria(difficulty,numberOfEmployees);
+        if(strategy == null)  return new GenericResponse<>(new Error(0,"Wrong Input", "This difficulty: (" +  difficulty + ") does not exist or this number: (" + numberOfEmployees + ") is invalid!"));
+
+        tasks = mapper.mapAllTasks(strategy.execute(difficulty,numberOfEmployees,retrievedTasks));
+
+        if(tasks.isEmpty())  return new GenericResponse<>(new Error(0,"Not Found", "No Task records exist for given difficulty: " + difficulty + " and given number of employees: " + numberOfEmployees));
+
+        return new GenericResponse<>(tasks);
+    }
 
 }
