@@ -32,9 +32,13 @@ public class  EmployeeMapperShould {
     private BusinessUnit businessUnit;
     private Company company;
     private Role role;
-    private Privilege readPrivilege;
-    private Privilege writePrivilege;
-    private List<Privilege> privilege;
+    //private Privilege readPrivilege;
+    //private Privilege writePrivilege;
+   // private List<Privilege> privilege;
+    private String username;
+    private String password;
+    private String email;
+    private List<Role> roles = new ArrayList<>();
 
     @Before
     public void setUp(){
@@ -47,14 +51,20 @@ public class  EmployeeMapperShould {
         department = new Department("DepartmentName",businessUnit);
         department.setId((long) 1);
         unit = new Unit("UnitName",department);
-        readPrivilege = new Privilege("readPrivilege");
+       /* readPrivilege = new Privilege("readPrivilege");
         writePrivilege = new Privilege("writePrivilege");
         privilege.add(readPrivilege);
-        privilege.add(writePrivilege);
-        role = new Role(RoleAssignment.ADMIN,privilege);
+        privilege.add(writePrivilege);*/
+       username="ADMIN";
+       password="admin";
+       email="admin@gmail.com";
+        role = new Role(RoleAssignment.ADMIN,"adminRole");
         role.setId((long) 1);
+        roles.add(role);
         unit.setId(1);
-        employeeInput = new Employee(1,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, company, businessUnit, department, unit,null, "Junior Developer",role);
+        employeeInput = new Employee(1,"Panagiotis", "Milios", "Kimolou 14", "2108817081",
+                new Date(113, 12, 1), new Date(), true, true, company, businessUnit, department, unit,null, "Junior Developer"
+                ,username,password,email,roles);
         employeeInput.setId(10);
 
         employeeResponseOutput = employeeMapper.mapEmployeeResponseFromEmployee(employeeInput);

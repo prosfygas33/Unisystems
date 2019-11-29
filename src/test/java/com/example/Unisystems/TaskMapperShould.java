@@ -20,20 +20,30 @@ public class TaskMapperShould {
     private Employee employee;
     private TaskResponse expectedOutput;
     private Role role;
-    private Privilege readPrivilege;
-    private Privilege writePrivilege;
-    private List<Privilege> privilege;
+    private String username;
+    private String password;
+    private String email;
+    private List<Role> roles= new ArrayList<>();
+    //private Privilege readPrivilege;
+    //private Privilege writePrivilege;
+    //private List<Privilege> privilege;
 
     @Before
     public void setUp(){
         mapper = new TaskMapper();
-        readPrivilege = new Privilege("readPrivilege");
+      /*  readPrivilege = new Privilege("readPrivilege");
         writePrivilege = new Privilege("writePrivilege");
         privilege.add(readPrivilege);
         privilege.add(writePrivilege);
-        role = new Role(RoleAssignment.ADMIN,privilege);
+        role = new Role(RoleAssignment.ADMIN,privilege);*/
+        username="ADMIN";
+        password="admin";
+        email="admin@gmail.com";
+        role = new Role(RoleAssignment.ADMIN,"adminRole");
         role.setId((long) 1);
-        employee = new Employee(1,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(), true, true, null, null, null, null,null, "Junior Developer",role);
+        roles.add(role);
+        role.setId((long) 1);
+        employee = new Employee(1,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new Date(113, 12, 1), new Date(120,11,2), true, true, null, null, null, null,null, "Junior Developer",,username,password,email,roles);
         employee.setId(10);
         List<Employee> employees = new ArrayList<>();
         employees.add(employee);

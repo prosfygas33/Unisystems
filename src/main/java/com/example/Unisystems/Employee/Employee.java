@@ -7,6 +7,7 @@ import com.example.Unisystems.RoleAuthentication.Role;
 import com.example.Unisystems.Task.Task;
 import com.example.Unisystems.Unit.Unit;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.mapping.Set;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -59,22 +60,34 @@ public class Employee {
 
     private String position;
 
-    @ManyToOne
+    @Column(name = "USERNAME")
+    private String username;
+    @Column(name = "PASSWORD")
+    private String password;
+    @Column(name = "EMAIL")
+    private String email;
+
+    @ManyToMany
+    @JoinTable(name = "User_ROLES",
+            joinColumns =  @JoinColumn(name = "employee_id"),inverseJoinColumns= @JoinColumn(name = "role_id"))
+    private List<Role> roles= new ArrayList();
+
+   /* @ManyToOne
    @JoinTable(name = "employees_roles",
     joinColumns = {@JoinColumn(name="employee_id")},
             inverseJoinColumns ={ @JoinColumn(name = "role_id") })
 
-          /*  name = "employees_roles",
-            joinColumns = @JoinColumn(
-                                name = "employee_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))*/
-    private Role role;
+          // name = "employees_roles",
+            //joinColumns = @JoinColumn(
+                             //   name = "employee_id", referencedColumnName = "id"),
+           // inverseJoinColumns = @JoinColumn(
+                   // name = "role_id", referencedColumnName = "id"))
+    private Role role;*/
 
     public Employee() {
     }
 
-    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasks, String position, Role role) {
+    public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasks, String position, String username, String password, String email, List roles) {
         this.recordNumber = recordNumber;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -90,7 +103,10 @@ public class Employee {
         this.unit = unit;
         this.tasks = tasks;
         this.position = position;
-        this.role = role;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.roles = roles;
     }
 
     public long getId() {
@@ -221,11 +237,35 @@ public class Employee {
         this.position = position;
     }
 
-    public Role getRole() {
-        return role;
+    public String getUsername() {
+        return username;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List roles) {
+        this.roles = roles;
     }
 }

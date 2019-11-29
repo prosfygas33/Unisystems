@@ -8,38 +8,53 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class Role {
+@Table(name ="role")
+        public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "role_id")
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "NAME")
     private RoleAssignment name;
 
-    @OneToMany//(mappedBy = "roles")
+    @Column(name = "DESCRIPTION")
+    private String description;
+  /*  @Column(name = "CREATED_ON")
+    private Long createdOn;
+    @Column(name = "MODIFIED_ON")
+    private Long modifiedOn;*/
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.MERGE
+            },
+            mappedBy = "roles")
     private List<Employee> employees;
 
-    @ManyToMany
-    /*@JoinTable(
-           name = "roles_privileges",
-            joinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "privilege_id", referencedColumnName = "id"))*/
+   /*@ManyToMany
+    //@JoinTable(
+         //  name = "roles_privileges",
+          //  joinColumns = @JoinColumn(
+                   // name = "role_id", referencedColumnName = "id"),
+          //  inverseJoinColumns = @JoinColumn(
+                //   name = "employee_id", referencedColumnName = "id"))*/
 
-            @JoinTable(name = "role_privileges",
-                    joinColumns = {@JoinColumn(name="role_id")},
-                    inverseJoinColumns ={ @JoinColumn(name = "privilege_id") })
+           // @JoinTable(name = "role_privileges",
+                   // joinColumns = {@JoinColumn(name="role_id")},
+                   // inverseJoinColumns ={ @JoinColumn(name = "employee_id") })
+  // private List<Employee> employees;*/
 
-    private List<Privilege> privileges;
+    //private List<Privilege> privileges;*/
 
     public Role() {
     }
 
-    public Role(RoleAssignment name, List<Privilege> privileges) {
+    public Role(RoleAssignment name, String description) {
         this.name = name;
-        this.privileges = privileges;
+        this.description = description;
     }
 
     public Long getId() {
@@ -58,11 +73,11 @@ public class Role {
         this.name = name;
     }
 
-    public List<Privilege> getPrivileges() {
-        return privileges;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPrivileges(List<Privilege> privileges) {
-        this.privileges = privileges;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
