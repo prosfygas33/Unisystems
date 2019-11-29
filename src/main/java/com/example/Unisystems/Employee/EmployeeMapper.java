@@ -58,6 +58,7 @@ public class EmployeeMapper {
         return employeesResponse;
     }
 
+    //This method works for @Post Task aswell
     public Employee mapEmployeeFromEmployeeRequest(EmployeeRequest employeeRequest,List<Task> taskList) throws ParseException {
         Iterable<Employee> retrievedEmployees = employeeRepository.findAll();
 
@@ -65,7 +66,6 @@ public class EmployeeMapper {
         for ( Employee employee : retrievedEmployees ){
             if ( employeeRequest.getRecordNumber() == employee.getRecordNumber()){
                 for ( Task task : taskList) {
-                    System.out.println("EDW");
                     employee.addTask(task);
                 }
                 employeeRepository.save(employee);

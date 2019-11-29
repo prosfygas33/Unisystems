@@ -2,6 +2,7 @@ package com.example.Unisystems.Task;
 
 import com.example.Unisystems.Employee.Employee;
 import com.example.Unisystems.Employee.EmployeeRequest;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -14,7 +15,9 @@ public class TaskRequest {
     private int estimationB;
     private int estimationC;
     private String status;
+    @JsonProperty
     private List<EmployeeRequest> assignedEmployees;
+    @JsonProperty
     private List<Long> employeesIds;
 
     public TaskRequest(String title, String desc, int estimationA, int estimationB, int estimationC, String status, List<EmployeeRequest> employees ) {
@@ -112,4 +115,6 @@ public class TaskRequest {
     public void setEmployeesIds(List<Long> employeesIds) {
         this.employeesIds = employeesIds;
     }
+
+
 }

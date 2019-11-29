@@ -37,12 +37,14 @@ public class Employee_Task_Mapper {
         taskRepository.save(task);
         List<Task> taskList = new ArrayList<>();
         taskList.add(task);
+
         //Create employee(s)
         List<Employee> employees = employeeMapper.mapAllEmployeesRequest(taskRequest,taskList);
-        if ( employees.size() != 0 ){
+        if ( employees.size() != 0 ){/*
             for ( Employee employee : employees ){
                 employeeRepository.save(employee);
             }
+         */
             return new GenericResponse<>("Task added successfully!\nEmployee(s) added successfully");
         }
 

@@ -16,6 +16,7 @@ public class EmployeeRequest {
     //True if type = Unisystems, false if type = external
     private String contactType;
     private String position;
+    private String unitName;
 
     public EmployeeRequest(int recordNumber, String firstName, String lastName, String address, String telephoneNumber, String startDate, String endDate, String status, String contactType, String position) {
         this.recordNumber = recordNumber;
