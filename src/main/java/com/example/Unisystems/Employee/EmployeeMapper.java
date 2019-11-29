@@ -101,12 +101,18 @@ public class EmployeeMapper {
     public List<Employee> mapAllEmployeesRequest(TaskRequest taskRequest,List<Task> taskList) throws ParseException {
         List<Employee> employees = new ArrayList<>();
 
+        int i = 0;
         for ( EmployeeRequest employeeRequest : taskRequest.getEmployees() ) {
-            for (EmployeeRequest employeeRequestCompare : taskRequest.getEmployees()) {
-                if ( employeeRequestCompare.getUnitName().equalsIgnoreCase(employeeRequest.getUnitName())){
-                    return null;
+            int j = 0;
+            while ( j < taskRequest.getEmployees().size() ){
+                if ( i != j ) {
+                    if (employeeRequest.getUnitName().equalsIgnoreCase(taskRequest.getEmployees().get(j).getUnitName())) {
+                        return null;
+                    }
                 }
+                j++;
             }
+            i++;
             Employee e = mapEmployeeFromEmployeeRequest(employeeRequest, taskList);
             if (e != null) {
                 employeeRepository.save(e);
