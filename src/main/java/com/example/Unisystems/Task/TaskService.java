@@ -79,36 +79,6 @@ public class TaskService {
         return getTaskById(task.getId());
     }
 
-/*
-    public GenericResponse<List<TaskResponse>> getTaskByCriteria(String difficulty) {
-        Iterable<Task> retrievedTasks = taskRepository.findAll();
-        List<TaskResponse> tasks;
-
-        SearchTaskStrategy strategy = searchTaskStrategyFactory.makeStrategyForCriteria(difficulty);
-        if(strategy == null)  return new GenericResponse<>(new Error(0,"Wrong Input", "This " +  difficulty + " does not exist!"));
-
-        tasks = mapper.mapAllTasks(strategy.execute(difficulty,retrievedTasks));
-
-        if(tasks.isEmpty())  return new GenericResponse<>(new Error(0,"Not Found", "No Task records exist for given difficulty: " + difficulty));
-
-        return new GenericResponse<>(tasks);
-    }
-
-    public GenericResponse<List<TaskResponse>> getTaskByCriteria(Long numberOfEmployees) {
-        Iterable<Task> retrievedTasks = taskRepository.findAll();
-        List<TaskResponse> tasks;
-
-        SearchTaskStrategy strategy = searchTaskStrategyFactory.makeStrategyForCriteria(numberOfEmployees);
-        if(strategy == null)  return new GenericResponse<>(new Error(0,"Wrong Input", "This number: (" +  numberOfEmployees + ") does not exist!"));
-
-        tasks = mapper.mapAllTasks(strategy.execute(numberOfEmployees,retrievedTasks));
-
-        if(tasks.isEmpty())  return new GenericResponse<>(new Error(0,"Not Found", "No Task records exist for given number of Employees: " + numberOfEmployees));
-
-        return new GenericResponse<>(tasks);
-    }
-
- */
 
     public GenericResponse<List<TaskResponse>> getTaskByCriteria(String difficulty, Long numberOfEmployees) {
         Iterable<Task> retrievedTasks = taskRepository.findAll();

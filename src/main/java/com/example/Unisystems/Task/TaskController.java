@@ -93,37 +93,6 @@ public class TaskController {
                 HttpStatus.OK);
     }
 
-    /*
-    @GetMapping("/getTaskByCriteria")
-    public ResponseEntity getTaskByNumberOfEmployees(@RequestParam(value="numberOfEmployees") Long numberOfEmployees) {
-        GenericResponse<List<TaskResponse>> response= taskService.getTaskByCriteria(numberOfEmployees);
-
-        if(response.getError() != null){
-            return new ResponseEntity<>(response.getError(),
-                    null,
-                    HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(new GetAllTasks(response.getData()),
-                null,
-                HttpStatus.OK);
-    }
-
-     */
-
-    @GetMapping("/getTaskByCriteria/{difficulty}/{numberOfEmployees}")
-    public ResponseEntity getTaskByDifficultyAndNumberOfEmployees(@PathVariable String difficulty, @PathVariable Long numberOfEmployees) {
-        GenericResponse<List<TaskResponse>> response= taskService.getTaskByCriteria(difficulty, numberOfEmployees);
-
-        if(response.getError() != null){
-            return new ResponseEntity<>(response.getError(),
-                    null,
-                    HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(new GetAllTasks(response.getData()),
-                null,
-                HttpStatus.OK);
-    }
-
 }
 
 
