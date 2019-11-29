@@ -7,6 +7,7 @@ import java.util.List;
 
 public class TaskRequest {
 
+    private Long id;
     private String title;
     private String desc;
     private int estimationA;
@@ -16,6 +17,10 @@ public class TaskRequest {
     private List<EmployeeRequest> assignedEmployees;
 
     public TaskRequest(String title, String desc, int estimationA, int estimationB, int estimationC, String status, List<EmployeeRequest> employees ) {
+    private List<Long> employeesIds;
+
+    public TaskRequest(Long id, String title, String desc, int estimationA, int estimationB, int estimationC, String status, List<Long> employeesIds) {
+        this.id = id;
         this.title = title;
         this.desc = desc;
         this.estimationA = estimationA;
@@ -31,6 +36,18 @@ public class TaskRequest {
 
     public void setEmployees(List<EmployeeRequest> employees) {
         this.assignedEmployees = employees;
+        this.employeesIds = employeesIds;
+    }
+
+    public TaskRequest() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -81,4 +98,11 @@ public class TaskRequest {
         this.status = status;
     }
 
+    public List<Long> getEmployeesIds() {
+        return employeesIds;
+    }
+
+    public void setEmployeesIds(List<Long> employeesIds) {
+        this.employeesIds = employeesIds;
+    }
 }

@@ -88,9 +88,11 @@ public class UnisystemsApplication implements CommandLineRunner {
 		List<String> updateList = new ArrayList<>();
 
 		Task task1 = new Task("Java app","Tournament",5,4,3, TaskStatus.DONE,null,updateList);
+		Task task2 = new Task("Python app","Game",2,1,1, TaskStatus.DONE,null,updateList);
 		List<Task> taskList = new ArrayList<>();
 		taskList.add(task1);
 		taskRepository.save(task1);
+		taskRepository.save(task2);
 
 		Employee emp1 = new Employee(111,"Panagiotis", "Milios", "Kimolou 14", "2108817081", new SimpleDateFormat("dd/mm/yyyy").parse("14/10/2010"), new Date(), true, true, u4,taskList,"Junior Developer");
 		List<Employee> employees = new ArrayList<>();

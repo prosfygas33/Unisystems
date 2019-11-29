@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -62,4 +63,17 @@ public class TaskMapper {
             return TaskStatus.DONE;
         }
     }
+
+    public List<TaskResponse> mapAllTasks(List<Task> tasks){
+        List<TaskResponse> tasksResponse = new ArrayList<>();
+
+        for ( Task task : tasks ){
+            tasksResponse.add(mapTaskResponseFromTask(task));
+        }
+        return tasksResponse;
+    }
 }
+
+
+
+
