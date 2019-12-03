@@ -19,7 +19,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
+                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN").authorities("AccessCompanies")
                 .and()
                 .withUser("employee").password(passwordEncoder().encode("employee")).roles("EMPLOYEE");
                 /*.and()
@@ -34,10 +34,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception { // oloi oi xrhstes paizoune by default,
+                                                                   // xrysimopoieis .antMatchers().authenticated(),
+                                                                   // gia periorismo afairw to .authenticated()
+                                                                   // kai krataw paradeigma  "/companies" mallon
+                                                                   // gia POST DELETE ktl
         http
                 .authorizeRequests()
-                .antMatchers("/**").hasAnyRole("EMPLOYEE","ADMIN")
+                .antMatchers("/**").authenticated()
+               //.antMatchers("/companies").hasAuthority("AccessCompanies")
+                //.antMatchers("/**").hasAnyRole("EMPLOYEE","ADMIN")
                 .and()
                 //.httpBasic()
                 .formLogin()

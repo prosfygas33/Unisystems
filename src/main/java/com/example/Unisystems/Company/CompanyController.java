@@ -15,4 +15,4 @@ public class CompanyController {
         return new GetAllCompanies(companyService.getCompanies());
     }
 
-}
+   }
