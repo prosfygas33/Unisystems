@@ -1,5 +1,6 @@
 package com.example.Unisystems.Task;
 
+import com.example.Unisystems.Employee.EmployeeRequest;
 import com.example.Unisystems.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -58,8 +59,25 @@ public class TaskController {
 
     @PutMapping("/task/{taskId}")
     public ResponseEntity updateTask(@PathVariable(value = "taskId") Long taskId, @Valid @RequestBody TaskRequest taskDetails)
-            throws RuntimeException {
-        GenericResponse<TaskResponse> response = taskService.updateTaskFromTaskRequest(taskDetails);
+            throws RuntimeException, ParseException {
+        GenericResponse<String> response = taskService.updateTaskDetails(taskDetails);
+        if (response.getError() != null) {
+            return new ResponseEntity<>(
+                    response.getError(),
+                    null,
+                    HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(
+                response.getData(),
+                null,
+                HttpStatus.OK);
+
+    }
+
+    @PatchMapping("/task/{taskId}")
+    public ResponseEntity updateTask(@PathVariable(value = "taskId") Long taskId, @Valid @RequestBody List<EmployeeRequest> employeeRequests)
+            throws RuntimeException, ParseException {
+        GenericResponse<String> response = taskService.updateTaskEmployees(taskId,employeeRequests);
         if (response.getError() != null) {
             return new ResponseEntity<>(
                     response.getError(),

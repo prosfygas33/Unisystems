@@ -2,6 +2,7 @@ package com.example.Unisystems.Task;
 
 
 import com.example.Unisystems.Employee.EmployeeRepository;
+import com.example.Unisystems.Employee.EmployeeRequest;
 import com.example.Unisystems.Employee_Task.Employee_Task_Mapper;
 import com.example.Unisystems.*;
 import com.example.Unisystems.Employee.Employee;
@@ -54,7 +55,7 @@ public class TaskService {
 
         return genericResponse;
     }
-
+/*
     public GenericResponse<TaskResponse> updateTaskFromTaskRequest(TaskRequest taskRequest) {
         Task task = taskRepository.findById(taskRequest.getId()).orElseThrow(()->new RuntimeException("There is no task with this id"));
         Iterable<Employee> employeeList= employeeRepository.findAllById(taskRequest.getEmployeesIds());
@@ -79,7 +80,38 @@ public class TaskService {
         taskRepository.save(task);
         return getTaskById(task.getId());
     }
+ */
 
+    public GenericResponse<String> updateTaskDetails(TaskRequest taskRequest){
+        Task task = taskRepository.findById(taskRequest.getId()).orElseThrow(()->new RuntimeException("There is no task with this id"));
+
+        task = taskMapper.updateTaskFromTaskRequest(task, taskRequest);
+        taskRepository.save(task);
+
+        return new GenericResponse<>("Task successfully updated!");
+    }
+
+
+    public GenericResponse<String> updateTaskEmployees(Long taskId, List<EmployeeRequest> employeeRequests){
+        Task task = taskRepository.findById(taskId).orElseThrow(()->new RuntimeException("There is no task with this id"));
+        Iterable<Employee> employees = employeeRepository.findAll();
+
+        if ( employeeRequests != null ) {
+            for (EmployeeRequest employeeRequest : employeeRequests) {
+                for (Employee employee : employees) {
+                    if (employeeRequest.getRecordNumber() == employee.getRecordNumber()) {
+                        employee.addTask(task);
+                        task.addEmployee(employee);
+                        employeeRepository.save(employee);
+                        taskRepository.save(task);
+                    }
+                }
+            }
+            return new GenericResponse<>("Task successfully updated!");
+        }
+
+        return new GenericResponse<>(new com.example.Unisystems.Error(400,"BAD_REQUEST","The expected input is wrong!"));
+    }
 
     public GenericResponse<List<TaskResponse>> getTaskByCriteria(String difficulty, Long numberOfEmployees) {
         Iterable<Task> retrievedTasks = taskRepository.findAll();

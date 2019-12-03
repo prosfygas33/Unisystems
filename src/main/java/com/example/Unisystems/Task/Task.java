@@ -121,4 +121,8 @@ public class Task {
     public void setUpdateList(List<String> updateList) {
         this.updateList = updateList;
     }
+
+    public void addEmployee(Employee employee){
+        this.assignedEmployees.add(employee);
+    }
 }

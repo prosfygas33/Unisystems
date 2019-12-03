@@ -102,23 +102,28 @@ public class EmployeeMapper {
         List<Employee> employees = new ArrayList<>();
 
         int i = 0;
-        for ( EmployeeRequest employeeRequest : taskRequest.getEmployees() ) {
-            int j = 0;
-            while ( j < taskRequest.getEmployees().size() ){
-                if ( i != j ) {
-                    if (employeeRequest.getUnitName().equalsIgnoreCase(taskRequest.getEmployees().get(j).getUnitName())) {
-                        return null;
+        if ( taskRequest.getEmployees() != null ) {
+            for (EmployeeRequest employeeRequest : taskRequest.getEmployees()) {
+                int j = 0;
+                while (j < taskRequest.getEmployees().size()) {
+                    if (i != j) {
+                        if (employeeRequest.getUnitName().equalsIgnoreCase(taskRequest.getEmployees().get(j).getUnitName())) {
+                            return null;
+                        }
                     }
+                    j++;
                 }
-                j++;
+                i++;
+                Employee e = mapEmployeeFromEmployeeRequest(employeeRequest, taskList);
+                if (e != null) {
+                    employeeRepository.save(e);
+                    employees.add(e);
+                }
             }
-            i++;
-            Employee e = mapEmployeeFromEmployeeRequest(employeeRequest, taskList);
-            if (e != null) {
-                employeeRepository.save(e);
-                employees.add(e);
-            }
+            return employees;
+        }else{
+            return null;
         }
-        return employees;
+
     }
 }
