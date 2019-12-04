@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -45,6 +46,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                .antMatchers("/companies").hasAuthority("AccessCompanies")
                 //.antMatchers("/**").hasAnyRole("EMPLOYEE","ADMIN")
                 .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
+                .and()
                 //.httpBasic()
                 .formLogin()
                 .and()
@@ -54,5 +57,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler(){
+        return new CustomAccessDeniedHandler();
     }
 }
