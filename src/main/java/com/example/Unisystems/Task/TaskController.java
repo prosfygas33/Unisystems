@@ -61,6 +61,7 @@ public class TaskController {
     @PutMapping("/task/{taskId}")
     public ResponseEntity updateTask(@PathVariable(value = "taskId") Long taskId, @Valid @RequestBody TaskRequest taskDetails)
             throws RuntimeException, ParseException {
+        taskDetails.setId(taskId);
         GenericResponse<String> response = taskService.updateTaskDetails(taskDetails);
         if (response.getError() != null) {
             return new ResponseEntity<>(
