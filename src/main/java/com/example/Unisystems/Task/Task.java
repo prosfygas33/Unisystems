@@ -125,4 +125,17 @@ public class Task {
     public void addEmployee(Employee employee){
         this.assignedEmployees.add(employee);
     }
+
+    public String getDifficultyFromEstimation() {
+        int sumEstimation = this.getEstimationA()+this.getEstimationB()+this.getEstimationC();
+        if (sumEstimation < 2){
+            return "Easy" ;
+        }
+        else if (sumEstimation>=2 && sumEstimation <= 4){
+            return "Medium";
+        }
+        else {
+            return "Hard";
+        }
+    }
 }

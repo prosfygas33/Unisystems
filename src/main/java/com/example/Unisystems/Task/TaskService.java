@@ -1,11 +1,9 @@
 package com.example.Unisystems.Task;
 
 
-import com.example.Unisystems.Employee.EmployeeRepository;
-import com.example.Unisystems.Employee.EmployeeRequest;
+import com.example.Unisystems.Employee.*;
 import com.example.Unisystems.Employee_Task.Employee_Task_Mapper;
 import com.example.Unisystems.*;
-import com.example.Unisystems.Employee.Employee;
 import com.example.Unisystems.Employee.EmployeeRepository;
 import com.example.Unisystems.Error;
 import com.example.Unisystems.TaskStrategy.SearchTaskStrategy;
@@ -92,14 +90,25 @@ public class TaskService {
     }
 
 
-    public GenericResponse<String> updateTaskEmployees(Long taskId, List<EmployeeRequest> employeeRequests){
+    public GenericResponse<String> updateTaskEmployees(Long taskId, GetAllEmployeeIds employeeIds){
         Task task = taskRepository.findById(taskId).orElseThrow(()->new RuntimeException("There is no task with this id"));
         Iterable<Employee> employees = employeeRepository.findAll();
 
-        if ( employeeRequests != null ) {
-            for (EmployeeRequest employeeRequest : employeeRequests) {
+        //Remove employeeId if he's already in the list
+        if ( task.getAssignedEmployees() != null ) {
+            for (Employee employee : task.getAssignedEmployees()) {
+                for (int i = 0; i < employeeIds.getEmployeeIds().size(); i++ ) {
+                    if ( employeeIds.getEmployeeIds().get(i).getId() == employee.getRecordNumber() ){
+                        employeeIds.getEmployeeIds().remove(i);
+                    }
+                }
+            }
+        }
+
+        if ( employeeIds != null ) {
+            for (EmployeeId employeeId : employeeIds.getEmployeeIds()) {
                 for (Employee employee : employees) {
-                    if (employeeRequest.getRecordNumber() == employee.getRecordNumber()) {
+                    if (employeeId.getId() == employee.getRecordNumber()) {
                         employee.addTask(task);
                         task.addEmployee(employee);
                         employeeRepository.save(employee);

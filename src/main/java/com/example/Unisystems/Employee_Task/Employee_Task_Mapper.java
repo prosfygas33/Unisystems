@@ -47,7 +47,7 @@ public class Employee_Task_Mapper {
             return new GenericResponse<>("Task added successfully!\nEmployee(s) added successfully");
         }
 
-        return new GenericResponse("Task added successfully\nEmployee already exists!");
+        return new GenericResponse("Task added successfully!");
     }
 
 }

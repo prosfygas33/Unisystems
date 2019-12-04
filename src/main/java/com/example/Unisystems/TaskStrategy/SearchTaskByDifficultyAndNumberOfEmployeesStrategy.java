@@ -17,16 +17,7 @@ public class SearchTaskByDifficultyAndNumberOfEmployeesStrategy implements Searc
 
         for( Task task : allTasks ) {
             //O mapper trwei null pointer exception
-            int sumEstimation = task.getEstimationA()+task.getEstimationB()+task.getEstimationC();
-            if (sumEstimation < 2){
-                tempDifficulty = "Easy";
-            }
-            else if (sumEstimation>=2 && sumEstimation <= 4){
-                tempDifficulty = "Medium";
-            }
-            else {
-                tempDifficulty = "Hard";
-            }
+            tempDifficulty = task.getDifficultyFromEstimation();
             if ( tempDifficulty.equalsIgnoreCase(difficulty) && task.getAssignedEmployees().size() == numberOfEmployees ){
                 tasks.add(task);
             }
