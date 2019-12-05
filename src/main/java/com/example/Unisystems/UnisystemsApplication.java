@@ -1,29 +1,13 @@
 package com.example.Unisystems;
 
-import com.example.Unisystems.BusinessUnit.BusinessUnit;
-import com.example.Unisystems.BusinessUnit.BusinessUnitRepository;
-import com.example.Unisystems.Company.Company;
-import com.example.Unisystems.Company.CompanyRepository;
-import com.example.Unisystems.Department.Department;
-import com.example.Unisystems.Department.DepartmentRepository;
-import com.example.Unisystems.Employee.Employee;
-import com.example.Unisystems.Employee.EmployeeRepository;
-import com.example.Unisystems.RoleAuthentication.*;
-import com.example.Unisystems.Task.Task;
-import com.example.Unisystems.Task.TaskRepository;
-import com.example.Unisystems.Task.TaskStatus;
-import com.example.Unisystems.Unit.Unit;
-import com.example.Unisystems.Unit.UnitRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import java.util.*;
-
+@EnableJpaAuditing
 @SpringBootApplication
-public class UnisystemsApplication implements CommandLineRunner {
-
+public class UnisystemsApplication{ //implements CommandLineRunner {
+/*
 	@Autowired
 	BusinessUnitRepository businessUnitRepository;
 
@@ -47,11 +31,11 @@ public class UnisystemsApplication implements CommandLineRunner {
 
 	@Autowired
 	PrivilegeRepository privilegeRepository;
-
+*/
 	public static void main(java.lang.String[] args) {
 		SpringApplication.run(UnisystemsApplication.class, args);
 	}
-
+/*
 	@Override
 	public void run(java.lang.String... args) throws Exception {
 
@@ -129,5 +113,7 @@ public class UnisystemsApplication implements CommandLineRunner {
 		employeeRepository.save(emp3);
 		employeeRepository.save(emp4);
 		employeeRepository.save(emp5);
-	}
+
+    }
+ */
 }

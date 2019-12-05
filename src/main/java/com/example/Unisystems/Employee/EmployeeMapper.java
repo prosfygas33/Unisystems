@@ -12,7 +12,7 @@ public class EmployeeMapper {
         return new EmployeeResponse(
             employee.getId(),
             employee.getRecordNumber(),
-            employee.getFirstname() + " " + employee.getLastname(),
+            employee.getFirstName() + " " + employee.getLastName(),
                 employee.getTelephoneNumber(),
                 getWorkingPeriod(employee),
                 employee.isStatus() ? Status.ACTIVE : Status.INACTIVE,

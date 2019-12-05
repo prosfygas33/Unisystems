@@ -5,6 +5,7 @@ import com.example.Unisystems.Department.Department;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "unit")
 public class Unit {
 
     @Id

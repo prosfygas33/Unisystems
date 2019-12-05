@@ -8,18 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="Task")
+@Table(name="task")
 public class Task {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
     private Long id;
     private String title;
+    @Column(name = "description")
     private String desc;
+    @Column(name = "estimation_a")
     private int estimationA;
+    @Column(name = "estimation_b")
     private int estimationB;
+    @Column(name = "estimation_c")
     private int estimationC;
     private TaskStatus status;
 
@@ -34,6 +37,9 @@ public class Task {
     @ElementCollection
     private List<String> updateList = new ArrayList<>();
 
+    public Task(){
+    }
+
     public Task(String title, String desc, int estimationA, int estimationB, int estimationC, TaskStatus status, List<Employee> assignedEmployees,List<String> updateList) {
         this.title = title;
         this.desc = desc;
@@ -45,8 +51,6 @@ public class Task {
         this.updateList = updateList;
     }
 
-    public Task(){
-    }
 
     public Long getId() {
         return id;

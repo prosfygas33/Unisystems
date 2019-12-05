@@ -1,13 +1,12 @@
 package com.example.Unisystems.RoleAuthentication;
 
 import com.example.Unisystems.Employee.Employee;
-import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
+@Table(name = "role")
 public class Role {
 
     @Id

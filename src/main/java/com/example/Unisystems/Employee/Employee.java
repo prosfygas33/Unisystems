@@ -6,16 +6,14 @@ import com.example.Unisystems.Department.Department;
 import com.example.Unisystems.RoleAuthentication.Role;
 import com.example.Unisystems.Task.Task;
 import com.example.Unisystems.Unit.Unit;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="Employee")
+@Table(name="employee")
 public class Employee {
 
     @Id
@@ -23,15 +21,22 @@ public class Employee {
     @Column(name = "employee_id")
     private long id;
 
+    @Column(name = "record_number")
     private  int recordNumber;
-    private String firstname;
-    private String lastname;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
     private String address;
+    @Column(name = "telephone_number")
     private String telephoneNumber;
+    @Column(name = "start_date")
     private Date startDate;
+    @Column(name = "end_date")
     private Date endDate;
     private boolean status;
     //True if type = Unisystems, false if type = external
+    @Column(name = "contact_type")
     private boolean contactType;
 
 
@@ -60,7 +65,7 @@ public class Employee {
     private String position;
 
     @ManyToOne
-   @JoinTable(name = "employees_roles",
+    @JoinTable(name = "employees_roles",
     joinColumns = {@JoinColumn(name="employee_id")},
             inverseJoinColumns ={ @JoinColumn(name = "role_id") })
 
@@ -76,8 +81,8 @@ public class Employee {
 
     public Employee(int recordNumber, String firstname, String lastname, String address, String telephoneNumber, Date startDate, Date endDate, boolean status, boolean contactType, Company company, BusinessUnit businessUnit, Department department, Unit unit, List<Task> tasks, String position, Role role) {
         this.recordNumber = recordNumber;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstname;
+        this.lastName = lastname;
         this.address = address;
         this.telephoneNumber = telephoneNumber;
         this.startDate = startDate;
@@ -109,20 +114,20 @@ public class Employee {
         this.recordNumber = recordNumber;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAddress() {

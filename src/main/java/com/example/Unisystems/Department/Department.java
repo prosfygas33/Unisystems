@@ -5,6 +5,7 @@ import com.example.Unisystems.BusinessUnit.BusinessUnit;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "department")
 public class Department {
 
     @Id
