@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="Task")
+@Table(name="task")
 public class Task {
 
 
@@ -16,11 +16,17 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
     private Long id;
+    @Column(name = "title")
     private String title;
-    private String desc;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "estimation_a")
     private int estimationA;
+    @Column(name = "estimation_b")
     private int estimationB;
+    @Column(name = "estimation_c")
     private int estimationC;
+    @Column(name = "status")
     private TaskStatus status;
 
 
@@ -38,7 +44,7 @@ public class Task {
 
     public Task(String title, String desc, int estimationA, int estimationB, int estimationC, TaskStatus status, List<Employee> assignedEmployees,List<String> updateList) {
         this.title = title;
-        this.desc = desc;
+        this.description = desc;
         this.estimationA = estimationA;
         this.estimationB = estimationB;
         this.estimationC = estimationC;
@@ -66,12 +72,12 @@ public class Task {
         this.title = title;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getEstimationA() {

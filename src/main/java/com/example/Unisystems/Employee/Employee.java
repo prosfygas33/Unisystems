@@ -1,20 +1,14 @@
 package com.example.Unisystems.Employee;
 
-import com.example.Unisystems.BusinessUnit.BusinessUnit;
-import com.example.Unisystems.Company.Company;
-import com.example.Unisystems.Department.Department;
 import com.example.Unisystems.Task.Task;
 import com.example.Unisystems.Unit.Unit;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="Employee")
+@Table(name="employee")
 public class Employee {
 
     @Id
@@ -22,15 +16,22 @@ public class Employee {
     @Column(name = "employee_id")
     private long id;
 
+    @Column(name = "record_number")
     private int recordNumber;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
     private String address;
+    @Column(name = "telephone_number")
     private String telephoneNumber;
+    @Column(name = "start_date")
     private Date startDate;
+    @Column(name = "end_date")
     private Date endDate;
     private boolean status;
     //True if type = Unisystems, false if type = external
+    @Column(name = "contact_type")
     private boolean contactType;
 
     @ManyToOne

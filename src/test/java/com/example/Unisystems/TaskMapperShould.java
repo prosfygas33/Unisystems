@@ -40,7 +40,7 @@ public class TaskMapperShould {
 
     @Test
     public void keepSameDesc(){
-        Assert.assertEquals(taskInput.getDesc(),expectedOutput.getDesc());
+        Assert.assertEquals(taskInput.getDescription(),expectedOutput.getDesc());
     }
 
     @Test

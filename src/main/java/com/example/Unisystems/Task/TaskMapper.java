@@ -1,13 +1,8 @@
 package com.example.Unisystems.Task;
 
-import com.example.Unisystems.Employee.Employee;
-import com.example.Unisystems.Employee.EmployeeMapper;
-import com.example.Unisystems.Employee.EmployeeRepository;
-import com.example.Unisystems.Employee.EmployeeRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +16,7 @@ public class TaskMapper {
         return new TaskResponse(
                 task.getId(),
                 task.getTitle(),
-                task.getDesc(),
+                task.getDescription(),
                 mapDifficultyFromEstimation(task).toString(),
                 task.getStatus().toString(),
                 task.getUpdateList(),
@@ -57,7 +52,7 @@ public class TaskMapper {
 
     public Task updateTaskFromTaskRequest(Task task, TaskRequest taskRequest){
         task.setTitle(taskRequest.getTitle());
-        task.setDesc(taskRequest.getDesc());
+        task.setDescription(taskRequest.getDesc());
         task.setEstimationA(taskRequest.getEstimationA());
         task.setEstimationB(taskRequest.getEstimationB());
         task.setEstimationC(taskRequest.getEstimationC());
