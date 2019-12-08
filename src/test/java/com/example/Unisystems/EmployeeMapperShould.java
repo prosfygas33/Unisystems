@@ -39,6 +39,7 @@ public class  EmployeeMapperShould {
     @Before
     public void setUp(){
         employeeMapper = new EmployeeMapper();
+        privilege = new ArrayList<>();
 
         company = new Company("Unisystems");
         company.setId((long) 1);
@@ -64,15 +65,11 @@ public class  EmployeeMapperShould {
     public void keepSameRecordNumber(){
         Assert.assertEquals(1,employeeResponseOutput.getRecordNumber());
     }
-
-    @Test
-    public void keepSameUnitId(){
-        Assert.assertEquals(1,employeeResponseOutput.getId());
-    }
+    
 
     @Test
     public void keepSameEmployeeId(){
-        Assert.assertEquals(10,employeeResponseOutput.getRecordNumber());
+        Assert.assertEquals(10,employeeResponseOutput.getId());
     }
 
     @Test
@@ -119,8 +116,6 @@ public class  EmployeeMapperShould {
 
     @Test
     public void keepSameUnitName(){
-        Assert.assertEquals("UnitName",employeeResponseOutput.getUnit());
+        Assert.assertEquals("UnitName", employeeResponseOutput.getUnit());
     }
-
-
 }

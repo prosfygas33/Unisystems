@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CompanyController {
 
-    CompanyService companyService;
+    private CompanyService companyService;
 
     public CompanyController(CompanyService companyService) {
         this.companyService = companyService;

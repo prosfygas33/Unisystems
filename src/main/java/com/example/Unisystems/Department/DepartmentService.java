@@ -13,11 +13,8 @@ import java.util.List;
 @Service
 public class DepartmentService {
 
-    @Autowired
-    DepartmentRepository departmentRepository;
-
-    @Autowired
-    DepartmentMapper departmentMapper;
+    private DepartmentRepository departmentRepository;
+    private DepartmentMapper departmentMapper;
 
     public DepartmentService(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper) {
         this.departmentRepository = departmentRepository;

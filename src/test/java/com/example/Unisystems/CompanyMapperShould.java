@@ -20,7 +20,7 @@ public class CompanyMapperShould {
     public void setup(){
 
         mapper = new CompanyMapper();
-        companyInput =new Company("Unisy");
+        companyInput =new Company("Unis");
         companyInput.setId((long) 5);
         expectedOutput = new CompanyResponse(5,"Unis");
     }

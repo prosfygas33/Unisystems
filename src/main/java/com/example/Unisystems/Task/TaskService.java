@@ -14,11 +14,13 @@ import java.util.List;
 @Service
 public class TaskService {
 
-    @Autowired
     private TaskRepository taskRepository;
-
-    @Autowired
     private TaskMapper mapper;
+
+    public TaskService(TaskRepository taskRepository, TaskMapper mapper) {
+        this.taskRepository = taskRepository;
+        this.mapper = mapper;
+    }
 
     public GenericResponse<TaskResponse>getTaskById(Long id){
         Iterable<Task> retrievedTasks = taskRepository.findAll();

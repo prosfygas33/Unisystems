@@ -26,6 +26,7 @@ public class TaskMapperShould {
 
     @Before
     public void setUp(){
+        privilege = new ArrayList<>();
         mapper = new TaskMapper();
         readPrivilege = new Privilege("readPrivilege");
         writePrivilege = new Privilege("writePrivilege");
