@@ -13,11 +13,13 @@ import java.util.List;
 @Service
 public class DepartmentService {
 
-    @Autowired
-    DepartmentRepository departmentRepository;
+    private DepartmentRepository departmentRepository;
+    private DepartmentMapper departmentMapper;
 
-    @Autowired
-    DepartmentMapper departmentMapper;
+    public DepartmentService(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper) {
+        this.departmentRepository = departmentRepository;
+        this.departmentMapper = departmentMapper;
+    }
 
     public List<DepartmentResponse> getDepartments(){
         Iterable<Department> retrievedDepartments = departmentRepository.findAll();

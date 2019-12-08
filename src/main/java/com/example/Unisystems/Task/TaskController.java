@@ -20,11 +20,14 @@ import java.util.List;
 @RequestMapping
 public class TaskController {
 
-    @Autowired
-    TaskService taskService;
 
-    @Autowired
-    TaskRepository taskRepository;
+    private TaskService taskService;
+    private TaskRepository taskRepository;
+
+    public TaskController(TaskService taskService, TaskRepository taskRepository) {
+        this.taskService = taskService;
+        this.taskRepository = taskRepository;
+    }
 
     @GetMapping("/task/{taskId}")
     public ResponseEntity getTaskById(@PathVariable Long taskId) {

@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DepartmentController {
 
-    @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
+
+    public DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
 
     @GetMapping("/Departments")
     public ResponseEntity getAllDepartments(){

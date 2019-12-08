@@ -9,11 +9,13 @@ import java.util.List;
 @Service
 public class CompanyService {
 
-    @Autowired
     private CompanyMapper companyMapper;
-
-    @Autowired
     private CompanyRepository companyRepository;
+
+    public CompanyService(CompanyMapper companyMapper, CompanyRepository companyRepository) {
+        this.companyMapper = companyMapper;
+        this.companyRepository = companyRepository;
+    }
 
     public List<CompanyResponse> getCompanies(){
         Iterable<Company> retrievedCompanies = companyRepository.findAll();
