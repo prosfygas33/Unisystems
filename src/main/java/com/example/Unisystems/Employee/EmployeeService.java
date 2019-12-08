@@ -43,7 +43,7 @@ public class EmployeeService {
         return employees;
     }
 
-    public GenericResponse<List<EmployeeResponse>>getAllEmployeesByUnitId(Long id) {
+    public GenericResponse<List<EmployeeResponse>>getAllEmployeesById(Long id) {
         Iterable<Employee> retrieveEmployees = repository.findAll();
         List<EmployeeResponse> employees = new ArrayList<>();
 
