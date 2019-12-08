@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                                                    // gia POST DELETE ktl
         http
                 .authorizeRequests()
-                //.antMatchers("/**").authenticated()
+                .antMatchers("/**").authenticated()
                .antMatchers("/companies").hasAuthority("AccessCompanies")
                 //.antMatchers("/**").hasAnyRole("EMPLOYEE","ADMIN")
                 .and()
