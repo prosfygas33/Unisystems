@@ -2,6 +2,7 @@ package com.example.Unisystems.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,47 +21,53 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN").authorities("AccessCompanies")
+                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
                 .and()
                 .withUser("employee").password(passwordEncoder().encode("employee")).roles("EMPLOYEE");
-                /*.and()
-                .withUser("companyManager").password(passwordEncoder().encode("companyManager")).roles("COMPANY_MANAGER")
-                .and()
-                .withUser("businessUnitManager").password(passwordEncoder().encode("businessUnitManager")).roles("BUSINESS_UNIT_MANAGER")
-                .and()
-                .withUser("unitManager").password(passwordEncoder().encode("unitManager")).roles("UNIT_MANAGER")
-                .and()
-                .withUser("departmentManager").password(passwordEncoder().encode("departmentManager")).roles("DEPARTMENT_MANAGER")*/
+/*.and()
+.withUser("companyManager").password(passwordEncoder().encode("companyManager")).roles("COMPANY_MANAGER")
+.and()
+.withUser("businessUnitManager").password(passwordEncoder().encode("businessUnitManager")).roles("BUSINESS_UNIT_MANAGER")
+.and()
+.withUser("unitManager").password(passwordEncoder().encode("unitManager")).roles("UNIT_MANAGER")
+.and()
+.withUser("departmentManager").password(passwordEncoder().encode("departmentManager")).roles("DEPARTMENT_MANAGER")*/
 
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception { // oloi oi xrhstes paizoune by default,
-                                                                   // xrysimopoieis .antMatchers().authenticated(),
-                                                                   // gia periorismo afairw to .authenticated()
-                                                                   // kai krataw paradeigma  "/companies" mallon
-                                                                   // gia POST DELETE ktl
+// xrysimopoieis .antMatchers().authenticated(),
+// gia periorismo afairw to .authenticated()
+// kai krataw paradeigma "/companies" mallon
+// gia POST DELETE ktl
         http
-                .authorizeRequests()
-                .antMatchers("/**").authenticated()
-               .antMatchers("/companies").hasAuthority("AccessCompanies")
-                //.antMatchers("/**").hasAnyRole("EMPLOYEE","ADMIN")
+                .csrf().disable()
+                ./*authorizeRequests()
+				.antMatchers("/**").authenticated()
+				.and().*/
+                authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/**").hasAnyRole("ADMIN", "EMPLOYEE")
                 .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
                 .and()
-                //.httpBasic()
+//.httpBasic()
                 .formLogin()
                 .and()
                 .logout();//.logoutRequestMatcher(new AntPathRequestMatcher("/signOut")).logoutSuccessUrl("/");
+
     }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AccessDeniedHandler accessDeniedHandler(){
+    public AccessDeniedHandler accessDeniedHandler() {
         return new CustomAccessDeniedHandler();
     }
 }
