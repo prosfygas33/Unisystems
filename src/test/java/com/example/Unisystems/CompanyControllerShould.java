@@ -37,7 +37,7 @@ public class CompanyControllerShould {
         mockCompanies.add(company2);
         when(service.getCompanies()).thenReturn(mockCompanies);
 
-        controller = new CompanyController(service);
+
     }
 
     @Test
