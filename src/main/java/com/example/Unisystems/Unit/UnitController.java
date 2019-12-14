@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UnitController {
 
-    @Autowired
     UnitService unitService;
+
+    public UnitController(UnitService unitService) {
+        this.unitService = unitService;
+    }
 
     @GetMapping("/Units")
     public ResponseEntity getAllUnits(){

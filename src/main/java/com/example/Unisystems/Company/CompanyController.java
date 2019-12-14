@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CompanyController {
 
-    @Autowired
-    CompanyService companyService;
+    private CompanyService companyService;
+
+    public CompanyController(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 
     @GetMapping("/companies")
     public ResponseEntity getAllCompanies(){

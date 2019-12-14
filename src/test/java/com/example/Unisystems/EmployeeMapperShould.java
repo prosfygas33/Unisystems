@@ -47,21 +47,6 @@ public class  EmployeeMapperShould {
     }
 
     @Test
-    public void keepSameRecordNumber(){
-        //Assert.assertEquals(1,employeeResponseOutput.get);
-    }
-
-    @Test
-    public void keepSameUnitId(){
-        Assert.assertEquals(1,employeeResponseOutput.getId());
-    }
-
-    @Test
-    public void keepSameEmployeeId(){
-        //Assert.assertEquals(10,employeeResponseOutput.getRecordNumber());
-    }
-
-    @Test
     public void keepSameFullName(){
         Assert.assertEquals("Panagiotis Milios",employeeResponseOutput.getFullName());
     }

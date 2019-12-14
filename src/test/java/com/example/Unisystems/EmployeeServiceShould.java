@@ -4,9 +4,9 @@ import com.example.Unisystems.BusinessUnit.BusinessUnit;
 import com.example.Unisystems.Company.Company;
 import com.example.Unisystems.Department.Department;
 import com.example.Unisystems.Employee.*;
-import com.example.Unisystems.RoleAuthentication.Privilege;
-import com.example.Unisystems.RoleAuthentication.Role;
-import com.example.Unisystems.RoleAuthentication.RoleAssignment;
+import com.example.Unisystems.EmployeeStrategy.SearchEmployeeStrategy;
+import com.example.Unisystems.EmployeeStrategy.SearchEmployeeStrategyFactory;
+import com.example.Unisystems.Task.Task;
 import com.example.Unisystems.Unit.Unit;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -44,7 +44,6 @@ public class EmployeeServiceShould {
     private BusinessUnit b1;
     private Department d1;
     private Unit u1, u2;
-    private Role employeeRole;
 
 
     @Before
@@ -58,21 +57,16 @@ public class EmployeeServiceShould {
         u1.setId(1);
         u2 = new Unit("Hiring Squad", d1);
         u2.setId(2);
-        List<Privilege> employeePrivileges = new ArrayList<>();
 
-        Privilege readPrivilege = new Privilege("Read");
-        employeePrivileges.add(readPrivilege);
-        employeeRole = new Role(RoleAssignment.EMPLOYEE,employeePrivileges);
-
-        Employee employee1 = new Employee(122, "Petros", "Euthimiou", "Spetson 17", "2108834081", new Date(111, 5, 15), null, true, true, c1, b1, d1, u1, null, "Senior Developer", employeeRole);
+        Employee employee1 = new Employee(122, "Petros", "Euthimiou", "Spetson 17", "2108834081", new Date(111, 5, 15), null, true, true, u1, null, "Senior Developer");
         employee1.setId(1);
-        Employee employee2 = new Employee(123, "Mitsos", "Kitsou", "Spartis 25", "2108855284", new Date(110, 11, 5), null , true, true, c1, b1, d1, u2, null, "Hr officer",employeeRole);
+        Employee employee2 = new Employee(123, "Mitsos", "Kitsou", "Spartis 25", "2108855284", new Date(110, 11, 5), null , true, true, u2, null, "Hr officer");
         employee2.setId(2);
-        Employee employee3 = new Employee(124, "Kostas", "Fleggas", "Tsoxa 13", "2107440081", new Date(112, 7, 15), null, true, true, c1, b1, d1, u2, null, " Manager",employeeRole);
+        Employee employee3 = new Employee(124, "Kostas", "Fleggas", "Tsoxa 13", "2107440081", new Date(112, 7, 15), null, true, true, u2, null, " Manager");
         employee3.setId(3);
 
-        employeeResponseFromMapper = new EmployeeResponse(1, 122, "Euthimiou Petros", "2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,"Fire Squad");// new EmployeeResponse(1, 122, "Petros Euthimiou", "Spetson 17", "2108834081", new Date(111, 5, 15), null, true, true, c1, b1, d1, u1, null, "Senior Developer");
-
+        //employeeResponseFromMapper = new EmployeeResponse(1, 122, "Euthimiou Petros", "2010-06-05 - present" , Status.ACTIVE, "ACTIVE", "Senior Developer",null,"Fire Squad");// new EmployeeResponse(1, 122, "Petros Euthimiou", "Spetson 17", "2108834081", new Date(111, 5, 15), null, true, true, c1, b1, d1, u1, null, "Senior Developer");
+        employeeResponseFromMapper = new EmployeeResponse(1, "Euthimiou Petros","2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,u1.getName());
         mockIterableEmployees = new ArrayList<Employee>(){
             {
                 add(employee1);
@@ -82,8 +76,8 @@ public class EmployeeServiceShould {
         };
         mockListEmployeesResponse = new ArrayList<EmployeeResponse>(){
             {
-                add(new EmployeeResponse(1, 122, "Euthimiou Petros", "2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,"Fire Squad"));
-                add(new EmployeeResponse(1, 122, "Euthimiou Petros", "2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,"Fire Squad"));
+                add(new EmployeeResponse(1, "Euthimiou Petros","2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,u1.getName()));
+                add(new EmployeeResponse(1, "Euthimiou Petros","2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,u1.getName()));
             }
         };
 
@@ -141,9 +135,9 @@ public class EmployeeServiceShould {
         assertEquals(3, output.size());
 
         List<EmployeeResponse> expected = new ArrayList<>();
-        expected.add(new EmployeeResponse(1, 122, "Euthimiou Petros", "2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,"Fire Squad"));
-        expected.add(new EmployeeResponse(1, 122, "Euthimiou Petros", "2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,"Fire Squad"));
-        expected.add(new EmployeeResponse(1, 122, "Euthimiou Petros", "2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,"Fire Squad"));
+        expected.add(new EmployeeResponse(1, "Euthimiou Petros","2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,u1.getName()));
+        expected.add(new EmployeeResponse(1, "Euthimiou Petros","2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,u1.getName()));
+        expected.add(new EmployeeResponse(1, "Euthimiou Petros","2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,u1.getName()));
         Assert.assertThat(output.get(0), Matchers.samePropertyValuesAs(expected.get(0)));
         Assert.assertThat(output.get(1), Matchers.samePropertyValuesAs(expected.get(1)));
         Assert.assertThat(output.get(2), Matchers.samePropertyValuesAs(expected.get(2)));
@@ -155,7 +149,7 @@ public class EmployeeServiceShould {
         assertEquals(1, output.getData().size());
 
         List<EmployeeResponse> expected = new ArrayList<>();
-        expected.add(new EmployeeResponse(1, 122, "Euthimiou Petros", "2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,"Fire Squad"));
+        expected.add(new EmployeeResponse(1, "Euthimiou Petros","2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,u1.getName()));
         Assert.assertThat(output.getData().get(0), Matchers.samePropertyValuesAs(expected.get(0)));
     }
 
@@ -165,8 +159,8 @@ public class EmployeeServiceShould {
         assertEquals(2, output.getData().size());
 
         List<EmployeeResponse> expected = new ArrayList<>();
-        expected.add(new EmployeeResponse(1, 122, "Euthimiou Petros", "2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,"Fire Squad"));
-        expected.add(new EmployeeResponse(1, 122, "Euthimiou Petros", "2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,"Fire Squad"));
+        expected.add(new EmployeeResponse(1, "Euthimiou Petros","2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,u1.getName()));
+        expected.add(new EmployeeResponse(1, "Euthimiou Petros","2108834081", "2010-06-05 - present", Status.ACTIVE, "ACTIVE", "Senior Developer",null,u1.getName()));
         Assert.assertThat(output.getData().get(0), Matchers.samePropertyValuesAs(expected.get(0)));
         Assert.assertThat(output.getData().get(1), Matchers.samePropertyValuesAs(expected.get(1)));
     }

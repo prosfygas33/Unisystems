@@ -82,6 +82,22 @@ public class AllUnitsJson {
             "                    }\n" +
             "                }\n" +
             "            }\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"id\": 6,\n" +
+            "            \"name\": \"Generic\",\n" +
+            "            \"department\": {\n" +
+            "                \"id\": 2,\n" +
+            "                \"name\": \"IT Services\",\n" +
+            "                \"businessUnit\": {\n" +
+            "                    \"id\": 1,\n" +
+            "                    \"name\": \"BusinessUnitA\",\n" +
+            "                    \"company\": {\n" +
+            "                        \"id\": 1,\n" +
+            "                        \"name\": \"UniSystems\"\n" +
+            "                    }\n" +
+            "                }\n" +
+            "            }\n" +
             "        }\n" +
             "    ]\n" +
             "}";

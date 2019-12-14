@@ -20,20 +20,19 @@ import java.util.stream.StreamSupport;
 @Service
 public class TaskService {
 
-    @Autowired
     private TaskRepository taskRepository;
-
-    @Autowired
     private EmployeeRepository employeeRepository;
-
-    @Autowired
     private TaskMapper taskMapper;
-
-    @Autowired
     private Employee_Task_Mapper employee_task_mapper;
-
-    @Autowired
     private SearchTaskStrategyFactory searchTaskStrategyFactory;
+
+    public TaskService(TaskRepository taskRepository, EmployeeRepository employeeRepository, TaskMapper taskMapper, Employee_Task_Mapper employee_task_mapper, SearchTaskStrategyFactory searchTaskStrategyFactory) {
+        this.taskRepository = taskRepository;
+        this.employeeRepository = employeeRepository;
+        this.taskMapper = taskMapper;
+        this.employee_task_mapper = employee_task_mapper;
+        this.searchTaskStrategyFactory = searchTaskStrategyFactory;
+    }
 
     public GenericResponse<TaskResponse> getTaskById(Long id) {
         Iterable<Task> retrievedTasks = taskRepository.findAll();

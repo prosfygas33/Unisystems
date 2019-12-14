@@ -17,21 +17,25 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
-    @Autowired
     private EmployeeRepository repository;
-    @Autowired
-    private CompanyRepository companyRepository;
-    @Autowired
-    private BusinessUnitRepository businessUnitRepository;
-    @Autowired
-    private DepartmentRepository departmentRepository;
-    @Autowired
-    private UnitRepository unitRepository;
-    @Autowired
     private EmployeeMapper mapper;
-    @Autowired
     private SearchEmployeeStrategyFactory factory;
 
+    //@Autowired
+    //private CompanyRepository companyRepository;
+    //@Autowired
+    //private BusinessUnitRepository businessUnitRepository;
+    //@Autowired
+    //private DepartmentRepository departmentRepository;
+    //@Autowired
+    //private UnitRepository unitRepository;
+
+
+    public EmployeeService(EmployeeRepository repository, EmployeeMapper mapper, SearchEmployeeStrategyFactory factory) {
+        this.repository = repository;
+        this.mapper = mapper;
+        this.factory = factory;
+    }
 
     public List<EmployeeResponse> getAllEmployees() {
         Iterable<Employee> retrieveEmployees = repository.findAll();

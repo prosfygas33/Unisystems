@@ -48,7 +48,7 @@ public class UnisystemsApplication implements CommandLineRunner {
 
 	@Override
 	public void run(java.lang.String... args) throws Exception {
-
+/*
 		Company c1 = new Company("UniSystems");
 		//Company c2 = new Company("ACS","Transportation Services");
 
@@ -108,5 +108,6 @@ public class UnisystemsApplication implements CommandLineRunner {
 		employeeRepository.save(emp3);
 		employeeRepository.save(emp4);
 		employeeRepository.save(emp5);
+ */
 	}
 }

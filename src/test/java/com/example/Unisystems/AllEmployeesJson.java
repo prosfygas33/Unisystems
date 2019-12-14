@@ -6,10 +6,9 @@ public class AllEmployeesJson {
             "    \"employees\": [\n" +
             "        {\n" +
             "            \"id\": 1,\n" +
-            "            \"recordNumber\": 111,\n" +
             "            \"fullName\": \"Panagiotis Milios\",\n" +
             "            \"telephone\": \"2108817081\",\n" +
-            "            \"workingPeriod\": \"2014-01-01 00:00:00.0 - Present\",\n" +
+            "            \"workingPeriod\": \"2010-01-14 00:10:00.0 - 2019-12-14 17:19:21.275\",\n" +
             "            \"status\": \"ACTIVE\",\n" +
             "            \"contactType\": \"ACTIVE\",\n" +
             "            \"position\": \"Junior Developer\",\n" +
@@ -17,22 +16,22 @@ public class AllEmployeesJson {
             "                {\n" +
             "                    \"id\": 1,\n" +
             "                    \"title\": \"Java app\",\n" +
-            "                    \"desc\": \"Tournament\",\n" +
+            "                    \"description\": \"Tournament\",\n" +
             "                    \"estimationA\": 5,\n" +
             "                    \"estimationB\": 4,\n" +
             "                    \"estimationC\": 3,\n" +
             "                    \"status\": \"DONE\",\n" +
-            "                    \"updateList\": []\n" +
+            "                    \"updateList\": [],\n" +
+            "                    \"difficultyFromEstimation\": \"Hard\"\n" +
             "                }\n" +
             "            ],\n" +
             "            \"unit\": \"Debugging Squad\"\n" +
             "        },\n" +
             "        {\n" +
             "            \"id\": 2,\n" +
-            "            \"recordNumber\": 122,\n" +
             "            \"fullName\": \"Petros Euthimiou\",\n" +
             "            \"telephone\": \"2108834081\",\n" +
-            "            \"workingPeriod\": \"2011-06-15 00:00:00.0 - Present\",\n" +
+            "            \"workingPeriod\": \"2012-01-25 00:06:00.0 - 2019-12-14 17:19:21.275\",\n" +
             "            \"status\": \"ACTIVE\",\n" +
             "            \"contactType\": \"ACTIVE\",\n" +
             "            \"position\": \"Senior Developer\",\n" +
@@ -41,10 +40,9 @@ public class AllEmployeesJson {
             "        },\n" +
             "        {\n" +
             "            \"id\": 3,\n" +
-            "            \"recordNumber\": 123,\n" +
             "            \"fullName\": \"Mitsos Kitsou\",\n" +
             "            \"telephone\": \"2108855284\",\n" +
-            "            \"workingPeriod\": \"2010-12-05 00:00:00.0 - Present\",\n" +
+            "            \"workingPeriod\": \"2010-01-21 00:11:00.0 - 2019-12-14 17:19:21.275\",\n" +
             "            \"status\": \"ACTIVE\",\n" +
             "            \"contactType\": \"ACTIVE\",\n" +
             "            \"position\": \"Hr officer\",\n" +
@@ -53,10 +51,9 @@ public class AllEmployeesJson {
             "        },\n" +
             "        {\n" +
             "            \"id\": 4,\n" +
-            "            \"recordNumber\": 124,\n" +
             "            \"fullName\": \"Kostas Fleggas\",\n" +
             "            \"telephone\": \"2107440081\",\n" +
-            "            \"workingPeriod\": \"2012-08-15 00:00:00.0 - Present\",\n" +
+            "            \"workingPeriod\": \"2014-01-08 00:05:00.0 - 2019-12-14 17:19:21.275\",\n" +
             "            \"status\": \"ACTIVE\",\n" +
             "            \"contactType\": \"ACTIVE\",\n" +
             "            \"position\": \" Manager\",\n" +
@@ -65,11 +62,10 @@ public class AllEmployeesJson {
             "        },\n" +
             "        {\n" +
             "            \"id\": 5,\n" +
-            "            \"recordNumber\": 125,\n" +
             "            \"fullName\": \"George Dom\",\n" +
             "            \"telephone\": \"2105520081\",\n" +
-            "            \"workingPeriod\": \"2012-03-15 00:00:00.0 - 2020-03-15 00:00:00.0\",\n" +
-            "            \"status\": \"ACTIVE\",\n" +
+            "            \"workingPeriod\": \"1998-01-31 00:12:00.0 - 2010-01-31 00:11:00.0\",\n" +
+            "            \"status\": \"INACTIVE\",\n" +
             "            \"contactType\": \"ACTIVE\",\n" +
             "            \"position\": \" Mid-Senior Developer\",\n" +
             "            \"tasks\": [],\n" +

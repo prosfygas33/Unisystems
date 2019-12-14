@@ -9,11 +9,8 @@ import java.util.List;
 @Service
 public class UnitService {
 
-    @Autowired
-    UnitRepository unitRepository;
-
-    @Autowired
-    UnitMapper unitMapper;
+    private UnitRepository unitRepository;
+    private UnitMapper unitMapper;
 
     public UnitService(UnitRepository unitRepository, UnitMapper unitMapper) {
         this.unitRepository = unitRepository;
